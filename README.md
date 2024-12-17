@@ -39,9 +39,9 @@
 
 ### 📋 플레이 영상
 
-Link1: 준비 중
+Link1: https://youtu.be/XiNa4PAX0yM
 
-Link2: 준비 중
+Link2: https://youtu.be/rns5Fc7wEkU
 
 ---
 
