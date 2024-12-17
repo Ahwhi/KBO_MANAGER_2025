@@ -40,7 +40,7 @@ public class PitcherRank : MonoBehaviour
         ScrollRect scrollRect = content.GetComponentInParent<ScrollRect>();
         scrollRect.verticalNormalizedPosition = 1f;
 
-        RegulText.text = "*ÇöÀç ±ÔÁ¤ ÀÌ´×: " + (GameDirector.Teams[0].win + GameDirector.Teams[0].draw + GameDirector.Teams[0].lose).ToString();
+        RegulText.text = "*í˜„ì¬ ê·œì • ì´ë‹: " + (GameDirector.Teams[0].win + GameDirector.Teams[0].draw + GameDirector.Teams[0].lose).ToString();
 
         myDropdown.ClearOptions();
         List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
@@ -97,7 +97,7 @@ public class PitcherRank : MonoBehaviour
             12 => pitcher => pitcher.WHIP,
             _ => pitcher => sorted,
         };
-        if (sorted != 8 && sorted != 12) // ¹æ¾îÀ², WHIP
+        if (sorted != 8 && sorted != 12) // ë°©ì–´ìœ¨, WHIP
         {
             sortedPitcher = new List<Pitcher>(GameDirector.pitcher);
             if (sorted == 4)
@@ -173,7 +173,7 @@ public class PitcherRank : MonoBehaviour
             sortedPitcher = filteredPitchers;
         }
 
-        // »ı¼ºµÈ ÇÁ¸®ÆÕÀº Á¦°Å
+        // ìƒì„±ëœ í”„ë¦¬íŒ¹ì€ ì œê±°
         GameObject[] objectsToDelete = GameObject.FindGameObjectsWithTag("PitcherRank");
         foreach (GameObject obj in objectsToDelete)
         {
