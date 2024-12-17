@@ -30,7 +30,7 @@ public class ForeignPlayer : MonoBehaviour
         scrollRect.verticalNormalizedPosition = 1f;
         isBatterView = false;
         isBatterSelected = false;
-        Moneytext.text = "¿¹»ê: " + GameDirector.money.ToString("N0") + "¿ø";
+        Moneytext.text = "ì˜ˆì‚°: " + GameDirector.money.ToString("N0") + "ì›";
         OnViewPitcher();
     }
 
@@ -143,7 +143,7 @@ public class ForeignPlayer : MonoBehaviour
         if (value * 100000000 <= GameDirector.money)
         {
             BuyPanel.SetActive(true);
-            Nametext.text = pitcher.name + " ¼±¼ö¸¦ ¿µÀÔÇÏ±â À§ÇØ ¿ëº´ Åõ¼ö 1¸íÀÇ ¿şÀÌ¹ö °ø½Ã°¡ ÇÊ¿äÇÕ´Ï´Ù. ¾î¶² ¼±¼ö¸¦ ¿şÀÌ¹ö °ø½ÃÇÏ½Ã°Ú½À´Ï±î?";
+            Nametext.text = pitcher.name + " ì„ ìˆ˜ë¥¼ ì˜ì…í•˜ê¸° ìœ„í•´ ìš©ë³‘ íˆ¬ìˆ˜ 1ëª…ì˜ ì›¨ì´ë²„ ê³µì‹œê°€ í•„ìš”í•©ë‹ˆë‹¤. ì–´ë–¤ ì„ ìˆ˜ë¥¼ ì›¨ì´ë²„ ê³µì‹œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?";
             TargetP = pitcher;
             TargetValue = (long)(value * 100000000);
             GetBasicList();
@@ -160,7 +160,7 @@ public class ForeignPlayer : MonoBehaviour
         {
             isBatterSelected = true;
             BuyPanel.SetActive(true);
-            Nametext.text = batter.name + " ¼±¼ö¸¦ ¿µÀÔÇÏ±â À§ÇØ ¿ëº´ Å¸ÀÚ 1¸íÀÇ ¿şÀÌ¹ö °ø½Ã°¡ ÇÊ¿äÇÕ´Ï´Ù. ¾î¶² ¼±¼ö¸¦ ¿şÀÌ¹ö °ø½ÃÇÏ½Ã°Ú½À´Ï±î?";
+            Nametext.text = batter.name + " ì„ ìˆ˜ë¥¼ ì˜ì…í•˜ê¸° ìœ„í•´ ìš©ë³‘ íƒ€ì 1ëª…ì˜ ì›¨ì´ë²„ ê³µì‹œê°€ í•„ìš”í•©ë‹ˆë‹¤. ì–´ë–¤ ì„ ìˆ˜ë¥¼ ì›¨ì´ë²„ ê³µì‹œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?";
             TargetB = batter;
             TargetValue = (long)(value * 100000000);
             GetBasicList();
@@ -189,20 +189,20 @@ public class ForeignPlayer : MonoBehaviour
                     int OVR = GameDirector.pitcher[i].SPEED + GameDirector.pitcher[i].COMMAND + GameDirector.pitcher[i].BREAKING;
                     if (OVR <= 5)
                     {
-                        textArray[2].text = "<color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                        textArray[2].text = "<color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
                     }
                     else if (OVR >= 6 && OVR <= 10)
                     {
-                        textArray[2].text = "<color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                        textArray[2].text = "<color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
                     }
                     else if (OVR >= 11 && OVR <= 14)
                     {
-                        textArray[2].text = "<color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                        textArray[2].text = "<color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
                     }
                     else if (OVR >= 15)
                     {
-                        textArray[2].text = "<color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                        textArray[2].text = "<color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
                     }
                 }
             }
@@ -222,20 +222,20 @@ public class ForeignPlayer : MonoBehaviour
                     int OVR = GameDirector.batter[i].POWER + GameDirector.batter[i].CONTACT + GameDirector.batter[i].EYE;
                     if (OVR <= 5)
                     {
-                        textArray[2].text = "<color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                        textArray[2].text = "<color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
                     }
                     else if (OVR >= 6 && OVR <= 10)
                     {
-                        textArray[2].text = "<color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                        textArray[2].text = "<color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
                     }
                     else if (OVR >= 11 && OVR <= 14)
                     {
-                        textArray[2].text = "<color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                        textArray[2].text = "<color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
                     }
                     else if (OVR >= 15)
                     {
-                        textArray[2].text = "<color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                        textArray[2].text = "<color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
                     }
                 }
             }
@@ -271,20 +271,20 @@ public class ForeignPlayer : MonoBehaviour
                 
                 if (OVR <= 5)
                 {
-                    textArray[5].text = "<color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                    textArray[5].text = "<color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
                 }
                 else if (OVR >= 6 && OVR <= 10)
                 {
-                    textArray[5].text = "<color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                    textArray[5].text = "<color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
                 }
                 else if (OVR >= 11 && OVR <= 14)
                 {
-                    textArray[5].text = "<color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                    textArray[5].text = "<color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
                 }
                 else if (OVR >= 15)
                 {
-                    textArray[5].text = "<color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                    textArray[5].text = "<color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
                 }
 
                 textArray[6].text = GameDirector.Fbatter[i].POWER.ToString();
@@ -330,7 +330,7 @@ public class ForeignPlayer : MonoBehaviour
                     textArray[8].color = Color.magenta;
                 }
 
-                textArray[9].text = value.ToString("F2") + " ¾ï";
+                textArray[9].text = value.ToString("F2") + " ì–µ";
             }
         } else
         {
@@ -353,20 +353,20 @@ public class ForeignPlayer : MonoBehaviour
                 
                 if (OVR <= 5)
                 {
-                    textArray[5].text = "<color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                    textArray[5].text = "<color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
                 }
                 else if (OVR >= 6 && OVR <= 10)
                 {
-                    textArray[5].text = "<color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                    textArray[5].text = "<color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
                 }
                 else if (OVR >= 11 && OVR <= 14)
                 {
-                    textArray[5].text = "<color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                    textArray[5].text = "<color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
                 }
                 else if (OVR >= 15)
                 {
-                    textArray[5].text = "<color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                    textArray[5].text = "<color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
                 }
 
                 textArray[6].text = GameDirector.Fpitcher[i].SPEED.ToString();
@@ -412,7 +412,7 @@ public class ForeignPlayer : MonoBehaviour
                     textArray[8].color = Color.magenta;
                 }
 
-                textArray[9].text = value.ToString("F2") + " ¾ï";
+                textArray[9].text = value.ToString("F2") + " ì–µ";
             }
         }
         
