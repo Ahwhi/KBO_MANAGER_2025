@@ -8,25 +8,25 @@ public class SceneDirector : MonoBehaviour
 {
     public static Stack<string> sceneHistory = new Stack<string>();
     public static SceneDirector Instance;
-    //°øÅë
+    //ê³µí†µ
     private Button HomeButton;
     private Button BackButton;
-    //¸ŞÀÎ
+    //ë©”ì¸
     private Button GameStartButton;
     private Button ScheduleButton;
     private Button ManageButton;
     private Button RecordButton;
     private Button MarketButton;
-    //ÀÏÁ¤Ç¥
+    //ì¼ì •í‘œ
     private Button PostSeasonButton;
-    //ÆÀ°ü¸®
+    //íŒ€ê´€ë¦¬
     private Button ManageBatterButton;
     private Button ManagePitcherButton;
-    //±â·Ï½Ç
+    //ê¸°ë¡ì‹¤
     private Button TeamRankButton;
     private Button PitcherRankButton;
     private Button BatterRankButton;
-    //ÀÌÀû½ÃÀå
+    //ì´ì ì‹œì¥
     private Button TradeButton;
     private Button ForeignButton;
 
@@ -156,7 +156,7 @@ public class SceneDirector : MonoBehaviour
         }
         else
         {
-            Debug.Log("´õ ÀÌ»ó µÚ·Î °¥ ¾ÀÀÌ ¾ø½À´Ï´Ù.");
+            Debug.Log("ë” ì´ìƒ ë’¤ë¡œ ê°ˆ ì”¬ì´ ì—†ìŠµë‹ˆë‹¤.");
         }
     }
 
