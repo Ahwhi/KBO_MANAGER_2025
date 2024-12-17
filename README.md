@@ -44,9 +44,9 @@ Link2: 준비 중
 ---
 
 ### 🔎 게임 미리보기
-![SC0](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/0.png)
+![SC0](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/0.pn)
 ![SC1](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/1.png)
-![SC2](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/2.png)
+![SC2](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/2.pn)
 ![SC3](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/3.png)
 ![SC4](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/4.png)
 ![SC5](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/5.png)
