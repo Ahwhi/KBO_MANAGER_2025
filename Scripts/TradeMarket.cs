@@ -15,7 +15,7 @@ public class TradeMarket : MonoBehaviour
     public Material DefaultMaterial;
     public Slider ProcessSlider;
     public TextMeshProUGUI ProcessText, Moneytext;
-    bool isEnemyPB, isMyPB; // True = Åõ¼ö, False = Å¸ÀÚ
+    bool isEnemyPB, isMyPB; // True = íˆ¬ìˆ˜, False = íƒ€ì
     int enemyCandidateP = 0;
     int myCandidateP = 0;
     int enemyCandidateB = 0;
@@ -32,7 +32,7 @@ public class TradeMarket : MonoBehaviour
 
     void Start()
     {
-        Moneytext.text = "¿¹»ê: " + GameDirector.money.ToString("N0") + "¿ø";
+        Moneytext.text = "ì˜ˆì‚°: " + GameDirector.money.ToString("N0") + "ì›";
         int MyTeam = (int)GameDirector.myTeam;
         int unCheck = -1;
         for (int i = 0; i < 9; i++)
@@ -151,24 +151,24 @@ public class TradeMarket : MonoBehaviour
 
             foreach (var pitcher in mySelectedPitchers)
             {
-                pitcher.team = currentTeam; // »ó´ëÆÀÀ¸·Î Æ®·¹ÀÌµå
-                pitcher.isTrade = false; // Æ®·¹ÀÌµå »óÅÂ ÇØÁ¦
+                pitcher.team = currentTeam; // ìƒëŒ€íŒ€ìœ¼ë¡œ íŠ¸ë ˆì´ë“œ
+                pitcher.isTrade = false; // íŠ¸ë ˆì´ë“œ ìƒíƒœ í•´ì œ
             }
             foreach (var batter in mySelectedBatters)
             {
-                batter.team = currentTeam; // »ó´ëÆÀÀ¸·Î Æ®·¹ÀÌµå
-                batter.isTrade = false; // Æ®·¹ÀÌµå »óÅÂ ÇØÁ¦
+                batter.team = currentTeam; // ìƒëŒ€íŒ€ìœ¼ë¡œ íŠ¸ë ˆì´ë“œ
+                batter.isTrade = false; // íŠ¸ë ˆì´ë“œ ìƒíƒœ í•´ì œ
             }
 
             foreach (var pitcher in enemySelectedPitchers)
             {
-                pitcher.team = GameDirector.myTeam; // ³» ÆÀÀ¸·Î Æ®·¹ÀÌµå
-                pitcher.isTrade = false; // Æ®·¹ÀÌµå »óÅÂ ÇØÁ¦
+                pitcher.team = GameDirector.myTeam; // ë‚´ íŒ€ìœ¼ë¡œ íŠ¸ë ˆì´ë“œ
+                pitcher.isTrade = false; // íŠ¸ë ˆì´ë“œ ìƒíƒœ í•´ì œ
             }
             foreach (var batter in enemySelectedBatters)
             {
-                batter.team = GameDirector.myTeam; // ³» ÆÀÀ¸·Î Æ®·¹ÀÌµå
-                batter.isTrade = false; // Æ®·¹ÀÌµå »óÅÂ ÇØÁ¦
+                batter.team = GameDirector.myTeam; // ë‚´ íŒ€ìœ¼ë¡œ íŠ¸ë ˆì´ë“œ
+                batter.isTrade = false; // íŠ¸ë ˆì´ë“œ ìƒíƒœ í•´ì œ
             }
 
             int newPos = 1;
@@ -272,7 +272,7 @@ public class TradeMarket : MonoBehaviour
             {
                 ProcessSlider.value = 0;
                 ProcessSlider.fillRect.GetComponent<Image>().color = Color.red;
-                ProcessText.text = "Ãß°¡ ¼±¼ö ¿ä±¸";
+                ProcessText.text = "ì¶”ê°€ ì„ ìˆ˜ ìš”êµ¬";
                 ProcessText.color = Color.red;
                 SceneDirector.SetButton(SendButton, DefaultMaterial, false);
                 return false;
@@ -281,7 +281,7 @@ public class TradeMarket : MonoBehaviour
             {
                 ProcessSlider.value = 10;
                 ProcessSlider.fillRect.GetComponent<Image>().color = Color.red;
-                ProcessText.text = "Ãß°¡ ¼±¼ö ¿ä±¸";
+                ProcessText.text = "ì¶”ê°€ ì„ ìˆ˜ ìš”êµ¬";
                 ProcessText.color = Color.red;
                 SceneDirector.SetButton(SendButton, DefaultMaterial, false);
                 return false;
@@ -290,7 +290,7 @@ public class TradeMarket : MonoBehaviour
             {
                 ProcessSlider.value = 20;
                 ProcessSlider.fillRect.GetComponent<Image>().color = Color.red;
-                ProcessText.text = "Ãß°¡ ¼±¼ö ¿ä±¸";
+                ProcessText.text = "ì¶”ê°€ ì„ ìˆ˜ ìš”êµ¬";
                 ProcessText.color = Color.red;
                 SceneDirector.SetButton(SendButton, DefaultMaterial, false);
                 return false;
@@ -299,7 +299,7 @@ public class TradeMarket : MonoBehaviour
             {
                 ProcessSlider.value = 30;
                 ProcessSlider.fillRect.GetComponent<Image>().color = Color.red;
-                ProcessText.text = "Ãß°¡ ¼±¼ö ¿ä±¸";
+                ProcessText.text = "ì¶”ê°€ ì„ ìˆ˜ ìš”êµ¬";
                 ProcessText.color = Color.red;
                 SceneDirector.SetButton(SendButton, DefaultMaterial, false);
                 return false;
@@ -308,7 +308,7 @@ public class TradeMarket : MonoBehaviour
             {
                 ProcessSlider.value = 40;
                 ProcessSlider.fillRect.GetComponent<Image>().color = Color.red;
-                ProcessText.text = "Ãß°¡ ¼±¼ö ¿ä±¸";
+                ProcessText.text = "ì¶”ê°€ ì„ ìˆ˜ ìš”êµ¬";
                 ProcessText.color = Color.red;
                 SceneDirector.SetButton(SendButton, DefaultMaterial, false);
                 return false;
@@ -317,7 +317,7 @@ public class TradeMarket : MonoBehaviour
             {
                 ProcessSlider.value = 50;
                 ProcessSlider.fillRect.GetComponent<Image>().color = Color.yellow;
-                ProcessText.text = "Ãß°¡ ¼±¼ö ¿ä±¸";
+                ProcessText.text = "ì¶”ê°€ ì„ ìˆ˜ ìš”êµ¬";
                 ProcessText.color = Color.yellow;
                 SceneDirector.SetButton(SendButton, DefaultMaterial, false);
                 return false;
@@ -326,7 +326,7 @@ public class TradeMarket : MonoBehaviour
             {
                 ProcessSlider.value = 60;
                 ProcessSlider.fillRect.GetComponent<Image>().color = Color.yellow;
-                ProcessText.text = "Ãß°¡ ¼±¼ö ¿ä±¸";
+                ProcessText.text = "ì¶”ê°€ ì„ ìˆ˜ ìš”êµ¬";
                 ProcessText.color = Color.yellow;
                 SceneDirector.SetButton(SendButton, DefaultMaterial, false);
                 return false;
@@ -335,7 +335,7 @@ public class TradeMarket : MonoBehaviour
             {
                 ProcessSlider.value = 70;
                 ProcessSlider.fillRect.GetComponent<Image>().color = Color.yellow;
-                ProcessText.text = "Ãß°¡ ¼±¼ö ¿ä±¸";
+                ProcessText.text = "ì¶”ê°€ ì„ ìˆ˜ ìš”êµ¬";
                 ProcessText.color = Color.yellow;
                 SceneDirector.SetButton(SendButton, DefaultMaterial, false);
                 return false;
@@ -344,7 +344,7 @@ public class TradeMarket : MonoBehaviour
             {
                 ProcessSlider.value = 80;
                 ProcessSlider.fillRect.GetComponent<Image>().color = Color.yellow;
-                ProcessText.text = "Ãß°¡ ¼±¼ö ¿ä±¸";
+                ProcessText.text = "ì¶”ê°€ ì„ ìˆ˜ ìš”êµ¬";
                 ProcessText.color = Color.yellow;
                 SceneDirector.SetButton(SendButton, DefaultMaterial, false);
                 return false;
@@ -353,7 +353,7 @@ public class TradeMarket : MonoBehaviour
             {
                 ProcessSlider.value = 90;
                 ProcessSlider.fillRect.GetComponent<Image>().color = Color.yellow;
-                ProcessText.text = "Ãß°¡ ¼±¼ö ¿ä±¸";
+                ProcessText.text = "ì¶”ê°€ ì„ ìˆ˜ ìš”êµ¬";
                 ProcessText.color = Color.yellow;
                 SceneDirector.SetButton(SendButton, DefaultMaterial, false);
                 return false;
@@ -368,19 +368,19 @@ public class TradeMarket : MonoBehaviour
                     myPitcherCount + enemyCandidateP <= 30 &&
                     enemyBatterCount + myCandidateB <= 30 &&
                     enemyPitcherCount + myCandidateP <= 30 &&
-                    myCandidateB + myCandidateP <= 5 && // °¢ ÆÀ 5¸íÁ¦ÇÑ
+                    myCandidateB + myCandidateP <= 5 && // ê° íŒ€ 5ëª…ì œí•œ
                     enemyCandidateB + enemyCandidateP <= 5)
                 {
                     ProcessSlider.value = 100;
                     ProcessSlider.fillRect.GetComponent<Image>().color = Color.green;
-                    ProcessText.text = "Á¦¾È °¡´É";
+                    ProcessText.text = "ì œì•ˆ ê°€ëŠ¥";
                     ProcessText.color = Color.cyan;
                     SceneDirector.SetButton(SendButton, DefaultMaterial, true);
                     return true;
                 }
                 else
                 {
-                    ProcessText.text = "Á¦¾È ºÒ°¡ (KBO ·ê À§¹İ)";
+                    ProcessText.text = "ì œì•ˆ ë¶ˆê°€ (KBO ë£° ìœ„ë°˜)";
                     ProcessText.color = Color.red;
                     ProcessSlider.value = 0;
                     ProcessSlider.fillRect.GetComponent<Image>().color = Color.red;
@@ -390,14 +390,14 @@ public class TradeMarket : MonoBehaviour
             }
         } else
         {
-            ProcessText.text = "Á¦¾È ½ÃÀÛ";
+            ProcessText.text = "ì œì•ˆ ì‹œì‘";
             ProcessText.color = Color.gray;
             ProcessSlider.value = 0;
             ProcessSlider.fillRect.GetComponent<Image>().color = Color.gray;
             SceneDirector.SetButton(SendButton, DefaultMaterial, false);
             return false;
         }
-        ProcessText.text = "Á¦¾È ºÒ°¡ (ÀÌÀ¯¸¦ ¾Ë ¼ö ¾øÀ½)";
+        ProcessText.text = "ì œì•ˆ ë¶ˆê°€ (ì´ìœ ë¥¼ ì•Œ ìˆ˜ ì—†ìŒ)";
         ProcessText.color = Color.red;
         ProcessSlider.value = 0;
         SceneDirector.SetButton(SendButton, DefaultMaterial, false);
@@ -414,20 +414,20 @@ public class TradeMarket : MonoBehaviour
             currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text = pitcher.name;
             if (OVR <= 5)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
             }
             else if (OVR >= 6 && OVR <= 10)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
             }
             else if (OVR >= 11 && OVR <= 14)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
             }
             else if (OVR >= 15)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
             }
             
             currentPrefab.GetComponent<Image>().color = MyColor;
@@ -440,20 +440,20 @@ public class TradeMarket : MonoBehaviour
             currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text = pitcher.name;
             if (OVR <= 5)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
             }
             else if (OVR >= 6 && OVR <= 10)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
             }
             else if (OVR >= 11 && OVR <= 14)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
             }
             else if (OVR >= 15)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
             }
             currentPrefab.GetComponent<Image>().color = EnemyColor;
             enemyCandidateP++;
@@ -473,20 +473,20 @@ public class TradeMarket : MonoBehaviour
             int OVR = batter.POWER + batter.CONTACT + batter.EYE;
             if (OVR <= 5)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
             }
             else if (OVR >= 6 && OVR <= 10)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
             }
             else if (OVR >= 11 && OVR <= 14)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
             }
             else if (OVR >= 15)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
             }
             currentPrefab.GetComponent<Image>().color = MyColor;
             myCandidateB++;
@@ -499,20 +499,20 @@ public class TradeMarket : MonoBehaviour
             int OVR = batter.POWER + batter.CONTACT + batter.EYE;
             if (OVR <= 5)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
             }
             else if (OVR >= 6 && OVR <= 10)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
             }
             else if (OVR >= 11 && OVR <= 14)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
             }
             else if (OVR >= 15)
             {
-                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                currentPrefab.GetComponentInChildren<TextMeshProUGUI>().text += " <color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
             }
             currentPrefab.GetComponent<Image>().color = EnemyColor;
             enemyCandidateB++;
@@ -623,20 +623,20 @@ public class TradeMarket : MonoBehaviour
                     int OVR = GameDirector.pitcher[i].SPEED + GameDirector.pitcher[i].COMMAND + GameDirector.pitcher[i].BREAKING;
                     if (OVR <= 5)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
                     }
                     else if (OVR >= 6 && OVR <= 10)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
                     }
                     else if (OVR >= 11 && OVR <= 14)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
                     }
                     else if (OVR >= 15)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
                     }
 
                     textArray[4].text = GameDirector.pitcher[i].SPEED.ToString();
@@ -707,20 +707,20 @@ public class TradeMarket : MonoBehaviour
                     int OVR = GameDirector.pitcher[i].SPEED + GameDirector.pitcher[i].COMMAND + GameDirector.pitcher[i].BREAKING;
                     if (OVR <= 5)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
                     }
                     else if (OVR >= 6 && OVR <= 10)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
                     }
                     else if (OVR >= 11 && OVR <= 14)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
                     }
                     else if (OVR >= 15)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
                     }
 
                     textArray[4].text = GameDirector.pitcher[i].SPEED.ToString();
@@ -809,20 +809,20 @@ public class TradeMarket : MonoBehaviour
                     int OVR = GameDirector.batter[i].POWER + GameDirector.batter[i].CONTACT + GameDirector.batter[i].EYE;
                     if (OVR <= 5)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
                     }
                     else if (OVR >= 6 && OVR <= 10)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
                     }
                     else if (OVR >= 11 && OVR <= 14)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
                     }
                     else if (OVR >= 15)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
                     }
 
                     textArray[4].text = GameDirector.batter[i].POWER.ToString();
@@ -893,20 +893,20 @@ public class TradeMarket : MonoBehaviour
                     int OVR = GameDirector.batter[i].POWER + GameDirector.batter[i].CONTACT + GameDirector.batter[i].EYE;
                     if (OVR <= 5)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…</color><color=#FFFFFF>â˜†â˜†â˜†</color>";
 
                     }
                     else if (OVR >= 6 && OVR <= 10)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…</color><color=#FFFFFF>â˜†â˜†</color>";
                     }
                     else if (OVR >= 11 && OVR <= 14)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…â˜…</color><color=#FFFFFF>â˜†</color>";
                     }
                     else if (OVR >= 15)
                     {
-                        textArray[3].text = "<color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
+                        textArray[3].text = "<color=#FFFF00>â˜…â˜…â˜…â˜…</color>";
                     }
 
                     textArray[4].text = GameDirector.batter[i].POWER.ToString();
