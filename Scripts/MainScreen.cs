@@ -65,14 +65,14 @@ public class MainScreen : MonoBehaviour
     {
         int UnreadM = 0;
         int ReadM = 0;
-        // πÃ∏Æ ª˝º∫µ» «¡∏Æ∆’¿∫ ¡¶∞≈
+        // ÎØ∏Î¶¨ ÏÉùÏÑ±Îêú ÌîÑÎ¶¨ÌåπÏùÄ Ï†úÍ±∞
         GameObject[] objectsToDelete = GameObject.FindGameObjectsWithTag("Mail");
         foreach (GameObject obj in objectsToDelete)
         {
             Destroy(obj);
         }
 
-        // ª˝º∫
+        // ÏÉùÏÑ±
         for (int i = 0; i < GameDirector.mail.Count; i++)
         {
             Mail currentMail = GameDirector.mail[i];
@@ -86,15 +86,15 @@ public class MainScreen : MonoBehaviour
         }
         if (ReadM == 0 && UnreadM == 0)
         {
-            MailResult.text = "º“Ωƒ¿Ã æ¯Ω¿¥œ¥Ÿ.";
+            MailResult.text = "ÏÜåÏãùÏù¥ ÏóÜÏäµÎãàÎã§.";
         }
         else if (ReadM != 0 && UnreadM == 0)
         {
-            MailResult.text = "∏µÁ º“Ωƒ¿ª ¿–æ˙Ω¿¥œ¥Ÿ.";
+            MailResult.text = "Î™®Îì† ÏÜåÏãùÏùÑ ÏùΩÏóàÏäµÎãàÎã§.";
         }
         else
         {
-            MailResult.text = UnreadM.ToString() + "∞≥¿« ¿–¡ˆ æ ¿∫ º“Ωƒ¿Ã ¿÷Ω¿¥œ¥Ÿ.";
+            MailResult.text = UnreadM.ToString() + "Í∞úÏùò ÏùΩÏßÄ ÏïäÏùÄ ÏÜåÏãùÏù¥ ÏûàÏäµÎãàÎã§.";
         }
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(content.GetComponent<RectTransform>());
@@ -126,7 +126,7 @@ public class MainScreen : MonoBehaviour
         textArray = NewsInfoPanel.GetComponentsInChildren<TextMeshProUGUI>();
         textArray[0].text = clickedMail.Title;
         textArray[1].text = clickedMail.Detail;
-        textArray[2].text = $"{clickedMail.Dates.year}≥‚ {clickedMail.Dates.month}ø˘ {clickedMail.Dates.day}¿œ {DataToString.DayOfWeekToString(clickedMail.Dates.dayOfWeek)} {clickedMail.Sender} µÂ∏≤";
+        textArray[2].text = $"{clickedMail.Dates.year}ÎÖÑ {clickedMail.Dates.month}Ïõî {clickedMail.Dates.day}Ïùº {DataToString.DayOfWeekToString(clickedMail.Dates.dayOfWeek)} {clickedMail.Sender} ÎìúÎ¶º";
         Button[] buttonArray = NewsInfoPanel.GetComponentsInChildren<Button>();
         buttonArray[0].onClick.RemoveAllListeners();
         buttonArray[0].onClick.AddListener(() => OnMailRemove(clickedMail));
@@ -158,7 +158,7 @@ public class MainScreen : MonoBehaviour
         {
             if (sortedTeam[i].teamCode == (int)GameDirector.myTeam)
             {
-                CurrentRank.text = "[" + (i+1) + "¿ß] " + sortedTeam[i].win + "Ω¬ " + sortedTeam[i].lose + "∆– " + sortedTeam[i].draw + "π´ " + sortedTeam[i].WinRate().ToString("F3");
+                CurrentRank.text = "[" + (i+1) + "ÏúÑ] " + sortedTeam[i].win + "Ïäπ " + sortedTeam[i].lose + "Ìå® " + sortedTeam[i].draw + "Î¨¥ " + sortedTeam[i].WinRate().ToString("F3");
                 break;
             }
         }
@@ -169,20 +169,20 @@ public class MainScreen : MonoBehaviour
         Match3Text = GameObject.Find("Match3Text").GetComponent<TextMeshProUGUI>();
         Match4Text = GameObject.Find("Match4Text").GetComponent<TextMeshProUGUI>();
         Match5Text = GameObject.Find("Match5Text").GetComponent<TextMeshProUGUI>();
-        CurrentDay.text = GameDirector.currentDate.year.ToString() + "≥‚ " + GameDirector.currentDate.month.ToString() + "ø˘ " + GameDirector.currentDate.day.ToString() + "¿œ " + DataToString.DayOfWeekToString(GameDirector.currentDate.dayOfWeek);
+        CurrentDay.text = GameDirector.currentDate.year.ToString() + "ÎÖÑ " + GameDirector.currentDate.month.ToString() + "Ïõî " + GameDirector.currentDate.day.ToString() + "Ïùº " + DataToString.DayOfWeekToString(GameDirector.currentDate.dayOfWeek);
         CurrentDay.color = Color.white;
 
         int todayGameCount = 0;
         int textCount = 0;
         for (int t = 0; t < GameDirector.totalMatchCount; t++)
         {
-            // √÷±Ÿ ∞Ê±‚
+            // ÏµúÍ∑º Í≤ΩÍ∏∞
             if (GameDirector.schedule[t].isEnd && (GameDirector.schedule[t].homeTeam == GameDirector.myTeam || GameDirector.schedule[t].awayTeam == GameDirector.myTeam))
             {
                 ResentScedule = GameDirector.schedule[t];
             }
 
-            // ø¿¥√¿« ∞Ê±‚
+            // Ïò§ÎäòÏùò Í≤ΩÍ∏∞
             if (GameDirector.schedule[t].dates.year == GameDirector.currentDate.year &&
                 GameDirector.schedule[t].dates.month == GameDirector.currentDate.month &&
                 GameDirector.schedule[t].dates.day == GameDirector.currentDate.day)
@@ -190,23 +190,23 @@ public class MainScreen : MonoBehaviour
                 if (GameDirector.schedule[t].homeTeam == GameDirector.myTeam || GameDirector.schedule[t].awayTeam == GameDirector.myTeam)
                 {
                     Match1Text.color = CHighLight;
-                    Match1Text.text = "(»®) " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " (ø¯¡§)";
+                    Match1Text.text = "(Ìôà) " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " (ÏõêÏ†ï)";
                     M1L.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].homeTeam);
                     M1R.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].awayTeam);
 
-                    // ø¿¥√¿« º±πﬂ
+                    // Ïò§ÎäòÏùò ÏÑ†Î∞ú
                     HomeSPImage.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].homeTeam);
                     AwaySPImage.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].awayTeam);
                     for (int p = 0; p < GameDirector.pitcherCount; p++)
                     {
                         if (GameDirector.pitcher[p].team == GameDirector.schedule[t].homeTeam && GameDirector.Teams[(int)GameDirector.schedule[t].homeTeam].currentSP == GameDirector.pitcher[p].posInTeam)
                         {
-                            TodayHomeSP.text = GameDirector.pitcher[p].name.ToString() + " (" + GameDirector.pitcher[p].win.ToString() + "Ω¬ " + GameDirector.pitcher[p].lose + "∆– " + GameDirector.pitcher[p].earnedRunAverage.ToString("F2") + ")";
+                            TodayHomeSP.text = GameDirector.pitcher[p].name.ToString() + " (" + GameDirector.pitcher[p].win.ToString() + "Ïäπ " + GameDirector.pitcher[p].lose + "Ìå® " + GameDirector.pitcher[p].earnedRunAverage.ToString("F2") + ")";
                             HomeSPPanel.GetComponent<Image>().color = TeamColor.SetTeamColor(GameDirector.pitcher[p].team);
                         }
                         if (GameDirector.pitcher[p].team == GameDirector.schedule[t].awayTeam && GameDirector.Teams[(int)GameDirector.schedule[t].awayTeam].currentSP == GameDirector.pitcher[p].posInTeam)
                         {
-                            TodayAwaySP.text = GameDirector.pitcher[p].name.ToString() + " (" + GameDirector.pitcher[p].win.ToString() + "Ω¬ " + GameDirector.pitcher[p].lose + "∆– " + GameDirector.pitcher[p].earnedRunAverage.ToString("F2") + ")";
+                            TodayAwaySP.text = GameDirector.pitcher[p].name.ToString() + " (" + GameDirector.pitcher[p].win.ToString() + "Ïäπ " + GameDirector.pitcher[p].lose + "Ìå® " + GameDirector.pitcher[p].earnedRunAverage.ToString("F2") + ")";
                             AwaySPPanel.GetComponent<Image>().color = TeamColor.SetTeamColor(GameDirector.pitcher[p].team);
                         }
                     }
@@ -216,25 +216,25 @@ public class MainScreen : MonoBehaviour
                     textCount++;
                     if (textCount == 1)
                     {
-                        Match2Text.text = "(»®) " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " (ø¯¡§)";
+                        Match2Text.text = "(Ìôà) " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " (ÏõêÏ†ï)";
                         M2L.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].homeTeam);
                         M2R.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].awayTeam);
                     }
                     else if (textCount == 2)
                     {
-                        Match3Text.text = "(»®) " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " (ø¯¡§)";
+                        Match3Text.text = "(Ìôà) " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " (ÏõêÏ†ï)";
                         M3L.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].homeTeam);
                         M3R.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].awayTeam);
                     }
                     else if (textCount == 3)
                     {
-                        Match4Text.text = "(»®) " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " (ø¯¡§)";
+                        Match4Text.text = "(Ìôà) " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " (ÏõêÏ†ï)";
                         M4L.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].homeTeam);
                         M4R.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].awayTeam);
                     }
                     else if (textCount == 4)
                     {
-                        Match5Text.text = "(»®) " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " (ø¯¡§)";
+                        Match5Text.text = "(Ìôà) " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " (ÏõêÏ†ï)";
                         M5L.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].homeTeam);
                         M5R.sprite = TeamEmblem.GetEmblem(GameDirector.schedule[t].awayTeam);
                     }
@@ -243,18 +243,18 @@ public class MainScreen : MonoBehaviour
             }
         }
 
-        // ∆˜Ω∫∆Æ Ω√¡
+        // Ìè¨Ïä§Ìä∏ ÏãúÏ¶å
         if (GameDirector.isPostSeason)
         {
             for (int t = 0; t < 19; t++)
             {
-                // √÷±Ÿ ∞Ê±‚
+                // ÏµúÍ∑º Í≤ΩÍ∏∞
                 if (GameDirector.postSchedule[t].isEnd && (GameDirector.postSchedule[t].homeTeam == GameDirector.myTeam || GameDirector.postSchedule[t].awayTeam == GameDirector.myTeam))
                 {
                     ResentScedule = GameDirector.postSchedule[t];
                 }
 
-                // ø¿¥√¿« ∞Ê±‚
+                // Ïò§ÎäòÏùò Í≤ΩÍ∏∞
                 if (GameDirector.postSchedule[t].dates.year == GameDirector.currentDate.year &&
                     GameDirector.postSchedule[t].dates.month == GameDirector.currentDate.month &&
                     GameDirector.postSchedule[t].dates.day == GameDirector.currentDate.day &&
@@ -263,19 +263,19 @@ public class MainScreen : MonoBehaviour
                     if (GameDirector.postSchedule[t].homeTeam == GameDirector.myTeam || GameDirector.postSchedule[t].awayTeam == GameDirector.myTeam)
                     {
                         Match1Text.color = CHighLight;
-                        // ø¿¥√¿« º±πﬂ
+                        // Ïò§ÎäòÏùò ÏÑ†Î∞ú
                         HomeSPImage.sprite = TeamEmblem.GetEmblem(GameDirector.postSchedule[t].homeTeam);
                         AwaySPImage.sprite = TeamEmblem.GetEmblem(GameDirector.postSchedule[t].awayTeam);
                         for (int p = 0; p < GameDirector.pitcherCount; p++)
                         {
                             if (GameDirector.pitcher[p].team == GameDirector.postSchedule[t].homeTeam && GameDirector.Teams[(int)GameDirector.postSchedule[t].homeTeam].currentSP == GameDirector.pitcher[p].posInTeam)
                             {
-                                TodayHomeSP.text = GameDirector.pitcher[p].name.ToString() + " (" + GameDirector.pitcher[p].win.ToString() + "Ω¬ " + GameDirector.pitcher[p].lose + "∆– " + GameDirector.pitcher[p].earnedRunAverage.ToString("F2") + ")";
+                                TodayHomeSP.text = GameDirector.pitcher[p].name.ToString() + " (" + GameDirector.pitcher[p].win.ToString() + "Ïäπ " + GameDirector.pitcher[p].lose + "Ìå® " + GameDirector.pitcher[p].earnedRunAverage.ToString("F2") + ")";
                                 HomeSPPanel.GetComponent<Image>().color = TeamColor.SetTeamColor(GameDirector.pitcher[p].team);
                             }
                             if (GameDirector.pitcher[p].team == GameDirector.postSchedule[t].awayTeam && GameDirector.Teams[(int)GameDirector.postSchedule[t].awayTeam].currentSP == GameDirector.pitcher[p].posInTeam)
                             {
-                                TodayAwaySP.text = GameDirector.pitcher[p].name.ToString() + " (" + GameDirector.pitcher[p].win.ToString() + "Ω¬ " + GameDirector.pitcher[p].lose + "∆– " + GameDirector.pitcher[p].earnedRunAverage.ToString("F2") + ")";
+                                TodayAwaySP.text = GameDirector.pitcher[p].name.ToString() + " (" + GameDirector.pitcher[p].win.ToString() + "Ïäπ " + GameDirector.pitcher[p].lose + "Ìå® " + GameDirector.pitcher[p].earnedRunAverage.ToString("F2") + ")";
                                 AwaySPPanel.GetComponent<Image>().color = TeamColor.SetTeamColor(GameDirector.pitcher[p].team);
                             }
                         }
@@ -286,18 +286,18 @@ public class MainScreen : MonoBehaviour
                     }
                     if (t < 2)
                     {
-                        SeasonText.text = "ø¿¥√¿« ∞Ê±‚(øÕ¿œµÂƒ´µÂ)";
+                        SeasonText.text = "Ïò§ÎäòÏùò Í≤ΩÍ∏∞(ÏôÄÏùºÎìúÏπ¥Îìú)";
                     } else if (t >= 2 && t <= 6)
                     {
-                        SeasonText.text = "ø¿¥√¿« ∞Ê±‚(¡ÿ«√∑π¿Ãø¿«¡)";
+                        SeasonText.text = "Ïò§ÎäòÏùò Í≤ΩÍ∏∞(Ï§ÄÌîåÎ†àÏù¥Ïò§ÌîÑ)";
                     } else if (t >= 7 && t <= 11)
                     {
-                        SeasonText.text = "ø¿¥√¿« ∞Ê±‚(«√∑π¿Ãø¿«¡)";
+                        SeasonText.text = "Ïò§ÎäòÏùò Í≤ΩÍ∏∞(ÌîåÎ†àÏù¥Ïò§ÌîÑ)";
                     } else if (t >= 12 && t <= 18)
                     {
-                        SeasonText.text = "ø¿¥√¿« ∞Ê±‚(«—±πΩ√∏Æ¡Ó)";
+                        SeasonText.text = "Ïò§ÎäòÏùò Í≤ΩÍ∏∞(ÌïúÍµ≠ÏãúÎ¶¨Ï¶à)";
                     }
-                    Match1Text.text = "(»®) " + DataToString.TeamToString(GameDirector.postSchedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.postSchedule[t].awayTeam) + " (ø¯¡§)";
+                    Match1Text.text = "(Ìôà) " + DataToString.TeamToString(GameDirector.postSchedule[t].homeTeam) + " vs " + DataToString.TeamToString(GameDirector.postSchedule[t].awayTeam) + " (ÏõêÏ†ï)";
                     M1L.sprite = TeamEmblem.GetEmblem(GameDirector.postSchedule[t].homeTeam);
                     M1R.sprite = TeamEmblem.GetEmblem(GameDirector.postSchedule[t].awayTeam);
                     Destroy(M2L.gameObject);
@@ -324,21 +324,21 @@ public class MainScreen : MonoBehaviour
             if (ResentScedule.homeScore > ResentScedule.awayScore && ResentScedule.homeTeam == GameDirector.myTeam)
             {
                 ResentResult.color = Color.green;
-                ResentResult.text = "Ω¬∏Æ";
+                ResentResult.text = "ÏäπÎ¶¨";
                 ResentScore.text = ResentScedule.homeScore + ":" + ResentScedule.awayScore;
                 EnemyImage.sprite = TeamEmblem.GetEmblem(ResentScedule.awayTeam);
             }
             else if (ResentScedule.homeScore < ResentScedule.awayScore && ResentScedule.awayTeam == GameDirector.myTeam)
             {
                 ResentResult.color = Color.green;
-                ResentResult.text = "Ω¬∏Æ";
+                ResentResult.text = "ÏäπÎ¶¨";
                 EnemyImage.sprite = TeamEmblem.GetEmblem(ResentScedule.homeTeam);
                 ResentScore.text = ResentScedule.awayScore + ":" + ResentScedule.homeScore;
             }
             else if (ResentScedule.homeScore == ResentScedule.awayScore)
             {
                 ResentResult.color = Color.yellow;
-                ResentResult.text = "π´";
+                ResentResult.text = "Î¨¥";
                 if (ResentScedule.homeTeam == GameDirector.myTeam)
                 {
                     EnemyImage.sprite = TeamEmblem.GetEmblem(ResentScedule.awayTeam);
@@ -353,7 +353,7 @@ public class MainScreen : MonoBehaviour
             else
             {
                 ResentResult.color = Color.red;
-                ResentResult.text = "∆–πË";
+                ResentResult.text = "Ìå®Î∞∞";
                 if (ResentScedule.homeTeam == GameDirector.myTeam)
                 {
                     EnemyImage.sprite = TeamEmblem.GetEmblem(ResentScedule.awayTeam);
@@ -365,7 +365,7 @@ public class MainScreen : MonoBehaviour
                     ResentScore.text = ResentScedule.awayScore + ":" + ResentScedule.homeScore;
                 }
             }
-        } else // √πΩ√¿€¿œ∂ß 
+        } else // Ï≤´ÏãúÏûëÏùºÎïå 
         {
             MyImage.sprite = TeamEmblem.GetEmblem((TeamName)999);
             EnemyImage.sprite = TeamEmblem.GetEmblem((TeamName)999);
@@ -389,10 +389,10 @@ public class MainScreen : MonoBehaviour
             M4R.sprite = TeamEmblem.GetEmblem((TeamName)999);
             M5L.sprite = TeamEmblem.GetEmblem((TeamName)999);
             M5R.sprite = TeamEmblem.GetEmblem((TeamName)999);
-            TodayHomeSP.text = "∞Ê±‚∞° æ¯Ω¿¥œ¥Ÿ.";
-            TodayAwaySP.text = "∞Ê±‚∞° æ¯Ω¿¥œ¥Ÿ.";
+            TodayHomeSP.text = "Í≤ΩÍ∏∞Í∞Ä ÏóÜÏäµÎãàÎã§.";
+            TodayAwaySP.text = "Í≤ΩÍ∏∞Í∞Ä ÏóÜÏäµÎãàÎã§.";
             Match1Text.color = CBasic;
-            Match1Text.text = "∞Ê±‚∞° æ¯Ω¿¥œ¥Ÿ.";
+            Match1Text.text = "Í≤ΩÍ∏∞Í∞Ä ÏóÜÏäµÎãàÎã§.";
             Match2Text.text = "";
             Match3Text.text = "";
             Match4Text.text = "";
