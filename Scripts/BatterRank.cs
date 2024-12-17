@@ -41,7 +41,7 @@ public class BatterRank : MonoBehaviour
         ScrollRect scrollRect = content.GetComponentInParent<ScrollRect>();
         scrollRect.verticalNormalizedPosition = 1f;
 
-        RegulText.text = "*ÇöÀç ±ÔÁ¤ Å¸¼®: " + ((GameDirector.Teams[0].win + GameDirector.Teams[0].draw + GameDirector.Teams[0].lose)*3).ToString();
+        RegulText.text = "*í˜„ì¬ ê·œì • íƒ€ì„: " + ((GameDirector.Teams[0].win + GameDirector.Teams[0].draw + GameDirector.Teams[0].lose)*3).ToString();
 
         myDropdown.ClearOptions();
         List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
@@ -152,7 +152,7 @@ public class BatterRank : MonoBehaviour
             sortedBatter = filteredBatters;
         }
 
-        // »ı¼ºµÈ ÇÁ¸®ÆÕÀº Á¦°Å
+        // ìƒì„±ëœ í”„ë¦¬íŒ¹ì€ ì œê±°
         GameObject[] objectsToDelete = GameObject.FindGameObjectsWithTag("BatterRank");
         foreach (GameObject obj in objectsToDelete)
         {
