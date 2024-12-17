@@ -15,7 +15,7 @@
 
 ❄️ 플랫폼: Windows, Android(Mobile), iOS(Mobile)
 
-⭐ 엔진: **Unity 2022. 3. 44f1** <DX11>
+⭐ 엔진: **Unity 2022. 3. 44f1** 2D <DX11>
 
 💇‍♂ 프로젝트: **개인 (100%)**
 
