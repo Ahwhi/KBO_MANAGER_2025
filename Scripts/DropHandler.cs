@@ -14,7 +14,7 @@ public class DropHandler : MonoBehaviour, IDropHandler
         DragHandler dragHandler = draggedObject.GetComponent<DragHandler>();
         if (dragHandler == null)
         {
-            Debug.LogWarning("µå·¡±×µÈ °´Ã¼´Â DragHandler¸¦ Æ÷ÇÔÇÏÁö ¾Ê½À´Ï´Ù.");
+            Debug.LogWarning("ë“œë˜ê·¸ëœ ê°ì²´ëŠ” DragHandlerë¥¼ í¬í•¨í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
             return;
         }
 
