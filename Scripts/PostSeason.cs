@@ -16,7 +16,7 @@ public class PostSeason : MonoBehaviour
     void Start()
     {
         CurrentDay = GameObject.Find("CurrentDay").GetComponent<TextMeshProUGUI>();
-        CurrentDay.text = GameDirector.currentDate.year.ToString() + "³â " + GameDirector.currentDate.month.ToString() + "¿ù " + GameDirector.currentDate.day.ToString() + "ÀÏ " + DataToString.DayOfWeekToString(GameDirector.currentDate.dayOfWeek);
+        CurrentDay.text = GameDirector.currentDate.year.ToString() + "Å‚Ã¢ " + GameDirector.currentDate.month.ToString() + "Å¼Å¯ " + GameDirector.currentDate.day.ToString() + "Å”ÄŽ " + DataToString.DayOfWeekToString(GameDirector.currentDate.dayOfWeek);
         Emblems[0].sprite = TeamEmblem.GetEmblem(GameDirector.postSchedule[0].DownTeam);
         Emblems[1].sprite = TeamEmblem.GetEmblem(GameDirector.postSchedule[0].UpTeam);
         Emblems[3].sprite = TeamEmblem.GetEmblem(GameDirector.postSchedule[2].UpTeam);
@@ -111,7 +111,7 @@ public class PostSeason : MonoBehaviour
 
             if (GameDirector.postSchedule[i].isEnd && !GameDirector.postSchedule[i].isPass)
             {
-                Texts[i].text = GameDirector.postSchedule[i].dates.month.ToString() + "/" + GameDirector.postSchedule[i].dates.day.ToString() + " " + (++k).ToString() + "Â÷Àü " + GameDirector.postSchedule[i].homeScore.ToString() + " : " + GameDirector.postSchedule[i].awayScore.ToString();
+                Texts[i].text = GameDirector.postSchedule[i].dates.month.ToString() + "/" + GameDirector.postSchedule[i].dates.day.ToString() + " " + (++k).ToString() + "Ã‚Ã·Å”Ã¼ " + GameDirector.postSchedule[i].homeScore.ToString() + " : " + GameDirector.postSchedule[i].awayScore.ToString();
                 if (GameDirector.postSchedule[i].homeScore > GameDirector.postSchedule[i].awayScore)
                 {
                     Texts[i].color = TeamColor.SetTeamColor(GameDirector.postSchedule[i].homeTeam);
@@ -122,7 +122,7 @@ public class PostSeason : MonoBehaviour
 
             } else if (!GameDirector.postSchedule[i].isEnd && !GameDirector.postSchedule[i].isPass)
             {
-                Texts[i].text = GameDirector.postSchedule[i].dates.month.ToString() + "/" + GameDirector.postSchedule[i].dates.day.ToString() + " " + (++k).ToString() + "Â÷Àü";
+                Texts[i].text = GameDirector.postSchedule[i].dates.month.ToString() + "/" + GameDirector.postSchedule[i].dates.day.ToString() + " " + (++k).ToString() + "Ã‚Ã·Å”Ã¼";
             }
             
         }
