@@ -11,9 +11,9 @@
 
 ### 🎮 게임 설명
 
-⭐ 장르: **야구 시뮬레이션 게임**
+☀️ 장르: **야구 시뮬레이션 게임**
 
-⭐ 플랫폼: Windows, Android(Mobile), iOS(Mobile)
+❄️ 플랫폼: Windows, Android(Mobile), iOS(Mobile)
 
 ⭐ 엔진: **Unity 2022. 3. 44f1** <DX11>
 
@@ -25,13 +25,13 @@
 
 ### 🧾 기술 스택
 
-🔥 유니티 UI: (Canvas, Panel, Image, Sprite, Button, Scroll View, Slider, Dropdown 등) 
+🌟 Unity UI: (Canvas, Panel, Image, Sprite, Button, Scroll View, Slider, Dropdown 등) 
 
-🔥 C# 자료구조: (데이터 정렬 및 Queue<>, Stack<>, Func<>, Dictionary<>, List<> 등)
+🌌 C# 자료구조: (데이터 정렬 및 Queue<>, Stack<>, Func<>, Dictionary<>, List<> 등)
 
-🔥 C# CSV 파일(.txt) 저장/로드
+📇 C# CSV 파일(.txt) 저장/로드
 
-🔥 싱글턴 방식(GameDirector.cs) 게임 운영
+🌀 싱글턴 방식(GameDirector.cs) 게임 운영
 
 ---
 
