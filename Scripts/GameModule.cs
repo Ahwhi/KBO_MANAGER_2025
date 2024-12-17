@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class GameModule : MonoBehaviour
 {
     private Color HomeColor, AwayColor;
-    private int GameMode = 0; //0=¼öµ¿, 1=ÀÚµ¿ÁøÇà, 2=2¹è¼Ó, 3=3¹è¼Ó
+    private int GameMode = 0; //0=ìˆ˜ë™, 1=ìë™ì§„í–‰, 2=2ë°°ì†, 3=3ë°°ì†
     private bool isChange = false;
     private bool isChangeExecuted = false;
     private bool isPrefer = false;
@@ -83,7 +83,7 @@ public class GameModule : MonoBehaviour
         toggle4.onValueChanged.AddListener((isOn) => OnToggleChanged(isOn, 3));
         ModePanel.SetActive(false);
 
-        // ¼±¹ß Åõ¼öÀÇ °æ±â ¼ö¸¦ ¼±Áõ°¡
+        // ì„ ë°œ íˆ¬ìˆ˜ì˜ ê²½ê¸° ìˆ˜ë¥¼ ì„ ì¦ê°€
         if (!GameDirector.isPostSeason)
         {
             for (int i = 0; i < GameDirector.pitcherCount; i++)
@@ -97,7 +97,7 @@ public class GameModule : MonoBehaviour
                     GameDirector.pitcher[i].game++;
                 }
             }
-            // ¼±¹ß Å¸ÀÚµéÀÇ °æ±â ¼ö¸¦ ¼±Áõ°¡
+            // ì„ ë°œ íƒ€ìë“¤ì˜ ê²½ê¸° ìˆ˜ë¥¼ ì„ ì¦ê°€
             for (int n = 0; n < GameDirector.batterCount; n++)
             {
                 if (GameDirector.batter[n].team == GameDirector.schedule[GameDirector.currentGame].homeTeam && GameDirector.batter[n].posInTeam >= 101 && GameDirector.batter[n].posInTeam <= 109)
@@ -114,7 +114,7 @@ public class GameModule : MonoBehaviour
 
     void Update()
     {
-        // ¸ğµå È­¸é
+        // ëª¨ë“œ í™”ë©´
         if (isPrefer)
         {
             ModePanel.SetActive(true);
@@ -124,11 +124,11 @@ public class GameModule : MonoBehaviour
             ModePanel.SetActive(false);
         }
 
-        // ÀÚµ¿ ¸ğµåÀÏ¶§ ¼öµ¿ÇÃ·¡±× True
+        // ìë™ ëª¨ë“œì¼ë•Œ ìˆ˜ë™í”Œë˜ê·¸ True
         if (GameMode >=1 && GameMode <=3 && !game.IsGameOver)
         {
             isProcess = true;
-        } else if (GameMode == 0 && !game.IsGameOver) // ¼öµ¿ ¸ğµåÀÏ¶§ ½ºÆäÀÌ½º·Îµµ °¡´É
+        } else if (GameMode == 0 && !game.IsGameOver) // ìˆ˜ë™ ëª¨ë“œì¼ë•Œ ìŠ¤í˜ì´ìŠ¤ë¡œë„ ê°€ëŠ¥
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -136,7 +136,7 @@ public class GameModule : MonoBehaviour
             }
         }
 
-        // ³»°¡ °ø°İÀÏ¶§ ±³Ã¼Ã¢ ·ÎÁ÷
+        // ë‚´ê°€ ê³µê²©ì¼ë•Œ êµì²´ì°½ ë¡œì§
         if (!GameDirector.isPostSeason)
         {
             if ((game.IsHomeAttack && GameDirector.schedule[GameDirector.currentGame].homeTeam == GameDirector.myTeam) ||
@@ -156,7 +156,7 @@ public class GameModule : MonoBehaviour
                     isChangeExecuted = true;
                 }
             }
-            else // ³»°¡ ¼öºñÀÏ¶§ ±³Ã¼Ã¢ ·ÎÁ÷
+            else // ë‚´ê°€ ìˆ˜ë¹„ì¼ë•Œ êµì²´ì°½ ë¡œì§
             {
                 if (isChange)
                 {
@@ -191,7 +191,7 @@ public class GameModule : MonoBehaviour
                     isChangeExecuted = true;
                 }
             }
-            else // ³»°¡ ¼öºñÀÏ¶§ ±³Ã¼Ã¢ ·ÎÁ÷
+            else // ë‚´ê°€ ìˆ˜ë¹„ì¼ë•Œ êµì²´ì°½ ë¡œì§
             {
                 if (isChange)
                 {
@@ -214,22 +214,22 @@ public class GameModule : MonoBehaviour
     {
         while (true)
         {
-            // ÀÌ´× ¼³Á¤
+            // ì´ë‹ ì„¤ì •
             if (Game.Innings % 2 == 1)
             {
-                Game.IsHomeAttack = false; // 1, 3, 5... ÃÊ
+                Game.IsHomeAttack = false; // 1, 3, 5... ì´ˆ
             }
             else
             {
-                Game.IsHomeAttack = true; // 2, 4, 6... ¸»
+                Game.IsHomeAttack = true; // 2, 4, 6... ë§
             }
 
-            // ÄÄÇ»ÅÍ Åõ¼ö±³Ã¼ AI
+            // ì»´í“¨í„° íˆ¬ìˆ˜êµì²´ AI
             if (!GameDirector.isPostSeason)
             {
                 if (GameDirector.isSimulation ||
-                (!GameDirector.isSimulation && game.IsHomeAttack && GameDirector.schedule[t].homeTeam == GameDirector.myTeam) || // ÄÄÇ»ÅÍ°¡ ¿øÁ¤ÆÀÀÌ°í ¼öºñ¸é AI Àû¿ë
-                (!GameDirector.isSimulation && !game.IsHomeAttack && GameDirector.schedule[t].awayTeam == GameDirector.myTeam)) // ÄÄÇ»ÅÍ°¡ È¨ÆÀÀÌ°í ¼öºñ¸é AI Àû¿ë
+                (!GameDirector.isSimulation && game.IsHomeAttack && GameDirector.schedule[t].homeTeam == GameDirector.myTeam) || // ì»´í“¨í„°ê°€ ì›ì •íŒ€ì´ê³  ìˆ˜ë¹„ë©´ AI ì ìš©
+                (!GameDirector.isSimulation && !game.IsHomeAttack && GameDirector.schedule[t].awayTeam == GameDirector.myTeam)) // ì»´í“¨í„°ê°€ í™ˆíŒ€ì´ê³  ìˆ˜ë¹„ë©´ AI ì ìš©
                 {
                     if (!game.IsGameOver)
                     {
@@ -239,8 +239,8 @@ public class GameModule : MonoBehaviour
             } else
             {
                 if (GameDirector.isSimulation ||
-                (!GameDirector.isSimulation && game.IsHomeAttack && GameDirector.postSchedule[t].homeTeam == GameDirector.myTeam) || // ÄÄÇ»ÅÍ°¡ ¿øÁ¤ÆÀÀÌ°í ¼öºñ¸é AI Àû¿ë
-                (!GameDirector.isSimulation && !game.IsHomeAttack && GameDirector.postSchedule[t].awayTeam == GameDirector.myTeam)) // ÄÄÇ»ÅÍ°¡ È¨ÆÀÀÌ°í ¼öºñ¸é AI Àû¿ë
+                (!GameDirector.isSimulation && game.IsHomeAttack && GameDirector.postSchedule[t].homeTeam == GameDirector.myTeam) || // ì»´í“¨í„°ê°€ ì›ì •íŒ€ì´ê³  ìˆ˜ë¹„ë©´ AI ì ìš©
+                (!GameDirector.isSimulation && !game.IsHomeAttack && GameDirector.postSchedule[t].awayTeam == GameDirector.myTeam)) // ì»´í“¨í„°ê°€ í™ˆíŒ€ì´ê³  ìˆ˜ë¹„ë©´ AI ì ìš©
                 {
                     if (!game.IsGameOver)
                     {
@@ -249,14 +249,14 @@ public class GameModule : MonoBehaviour
                 }
             }
 
-            // UI ¾÷µ¥ÀÌÆ® (½Ã¹Ä·¹ÀÌ¼ÇÀº ·Îµù È­¸é Ãâ·Â)
+            // UI ì—…ë°ì´íŠ¸ (ì‹œë®¬ë ˆì´ì…˜ì€ ë¡œë”© í™”ë©´ ì¶œë ¥)
             GameModuleUI(GameDirector.currentGame, game);
             if (GameDirector.isSimulation)
             {
                 LoadCanvas.SetActive(true);
             }
 
-            // ¼±¼ö ´É·ÂÄ¡ ¹İ¿µÇÑ °á°ú µµÃâ ¼¼ÆÃ
+            // ì„ ìˆ˜ ëŠ¥ë ¥ì¹˜ ë°˜ì˜í•œ ê²°ê³¼ ë„ì¶œ ì„¸íŒ…
             Game.AbillityResult1 = StandardNum1;
             Game.AbillityResult1 += GameDirector.pitcher[Game.TargetPitcherIndex].COMMAND;
             Game.AbillityResult1 += GameDirector.pitcher[Game.TargetPitcherIndex].HP / 60;
@@ -275,7 +275,7 @@ public class GameModule : MonoBehaviour
             {
                 if (GameMode == 0)
                 {
-                    // ¹öÆ° ´­·¶À»¶§¸¸ ÇÑ ÅÏ ÁøÇà
+                    // ë²„íŠ¼ ëˆŒë €ì„ë•Œë§Œ í•œ í„´ ì§„í–‰
                     isProcess = false;
                     yield return new WaitUntil(() => Processing());
                 }
@@ -293,7 +293,7 @@ public class GameModule : MonoBehaviour
                 }
             }
 
-            // °ÔÀÓ ÁøÇà ÆÇÁ¤
+            // ê²Œì„ ì§„í–‰ íŒì •
             //Debug.Log("["+GameDirector.batter[Game.TargetBatterIndex].name + "] (AbillityResult1: " + game.AbillityResult1.ToString() + ")(AbillityResult2: " + game.AbillityResult2.ToString() + ")");
             if (diff > 7)
             {
@@ -301,16 +301,16 @@ public class GameModule : MonoBehaviour
             }
             if (Game.PlayerNum == Game.ComputerNum)
             {
-                // ±âº» 90, +±¸¼Ó*4, -ÆÄ¿ö*16 ÀÏ°æ¿ì
-                // Åõ¼ö5 VS Å¸ÀÚ1: 90 + 20 - 16 = 94 / È¨·± 6% È®·ü
-                // Åõ¼ö3 VS Å¸ÀÚ2: 90 + 12 - 32 = 70 / È¨·± 30% È®·ü
-                // Åõ¼ö2 VS Å¸ÀÚ3: 90 + 8 - 48 = 50 / È¨·± 50% È®·ü
-                // Åõ¼ö1 VS Å¸ÀÚ5: 90 + 4 - 80 = 14 / È¨·± 86% È®·ü
+                // ê¸°ë³¸ 90, +êµ¬ì†*4, -íŒŒì›Œ*16 ì¼ê²½ìš°
+                // íˆ¬ìˆ˜5 VS íƒ€ì1: 90 + 20 - 16 = 94 / í™ˆëŸ° 6% í™•ë¥ 
+                // íˆ¬ìˆ˜3 VS íƒ€ì2: 90 + 12 - 32 = 70 / í™ˆëŸ° 30% í™•ë¥ 
+                // íˆ¬ìˆ˜2 VS íƒ€ì3: 90 + 8 - 48 = 50 / í™ˆëŸ° 50% í™•ë¥ 
+                // íˆ¬ìˆ˜1 VS íƒ€ì5: 90 + 4 - 80 = 14 / í™ˆëŸ° 86% í™•ë¥ 
                 int rd = UnityEngine.Random.Range(1, 101);
                 //Debug.Log(rd.ToString());
                 if (rd > Game.AbillityResult2)
                 {
-                    GamePlay_HomeRun(t, Game); // 1~100 > 39 Å¸ÀÚ°¡ ÀßÇÑ°Í.
+                    GamePlay_HomeRun(t, Game); // 1~100 > 39 íƒ€ìê°€ ì˜í•œê²ƒ.
                 }
                 else
                 {
@@ -326,12 +326,12 @@ public class GameModule : MonoBehaviour
                 int AbillityResult3 = (GameDirector.pitcher[Game.TargetPitcherIndex].COMMAND * 14) - (GameDirector.batter[game.TargetBatterIndex].EYE * 4);
                 if (AbillityResult3 < 15)
                 {
-                    AbillityResult3 = 15; // Á¦±¸·ÂÀÌ ³·Àº Åõ¼ö°¡ ¼±±¸¾ÈÀÌ ³ôÀº Å¸ÀÚ¿¡°Ô ¹«Á¶°Ç º¼³İÀ» Çã¿ëÇÏÁö ¾Ê°ÔÇÔ. 85%È®·ü·Î º¼³İ
+                    AbillityResult3 = 15; // ì œêµ¬ë ¥ì´ ë‚®ì€ íˆ¬ìˆ˜ê°€ ì„ êµ¬ì•ˆì´ ë†’ì€ íƒ€ìì—ê²Œ ë¬´ì¡°ê±´ ë³¼ë„·ì„ í—ˆìš©í•˜ì§€ ì•Šê²Œí•¨. 85%í™•ë¥ ë¡œ ë³¼ë„·
                 }
                 if (UnityEngine.Random.Range(1, 101) > AbillityResult3)
                 {
-                    // (16,4)ÀÏ¶§ Á¦±¸ 1 vs ¼±±¸ 5 = -4, È®·ü 100% º¼³İ. Á¦±¸ 3 vs ¼±±¸ 3 = 36 È®·ü 64% º¼³İ, Á¦±¸ 5 vs ¼±±¸ 1 = 76, 24% È®·ü º¼³İ
-                    // (14,4)ÀÏ¶§ Á¦±¸ 1 vs ¼±±¸ 5 = -6, È®·ü 100% º¼³İ, Á¦±¸ 3 vs ¼±±¸ 3 = 30 È®·ü 70% º¼³İ, Á¦±¸ 5 vs ¼±±¸ 1 = 66, 33% È®·ü º¼³İ
+                    // (16,4)ì¼ë•Œ ì œêµ¬ 1 vs ì„ êµ¬ 5 = -4, í™•ë¥  100% ë³¼ë„·. ì œêµ¬ 3 vs ì„ êµ¬ 3 = 36 í™•ë¥  64% ë³¼ë„·, ì œêµ¬ 5 vs ì„ êµ¬ 1 = 76, 24% í™•ë¥  ë³¼ë„·
+                    // (14,4)ì¼ë•Œ ì œêµ¬ 1 vs ì„ êµ¬ 5 = -6, í™•ë¥  100% ë³¼ë„·, ì œêµ¬ 3 vs ì„ êµ¬ 3 = 30 í™•ë¥  70% ë³¼ë„·, ì œêµ¬ 5 vs ì„ êµ¬ 1 = 66, 33% í™•ë¥  ë³¼ë„·
                     GamePlay_BaseOnBalls(t, Game);
                 } else
                 {
@@ -358,7 +358,7 @@ public class GameModule : MonoBehaviour
             }
             else if (diff == 4)
             {
-                if (UnityEngine.Random.Range(0, 20) < GameDirector.pitcher[Game.TargetPitcherIndex].SPEED) // ±¸¼Ó1 => »ïÁø5% 2=>10%... 5=>25%
+                if (UnityEngine.Random.Range(0, 20) < GameDirector.pitcher[Game.TargetPitcherIndex].SPEED) // êµ¬ì†1 => ì‚¼ì§„5% 2=>10%... 5=>25%
                 {
                     GamePlay_StrikeOut(t, Game);
                 } else
@@ -385,8 +385,8 @@ public class GameModule : MonoBehaviour
                 }
             }
             int AbillityResult4 = GameDirector.batter[Game.TargetBatterIndex].EYE - GameDirector.pitcher[Game.TargetPitcherIndex].COMMAND;
-            // ¼±±¸¾È 3 - Á¦±¸·Â 1 = 2
-            int NumBallCounts = UnityEngine.Random.Range(1, 7 + AbillityResult4); // ÀÏ°æ¿ì¿£ ±âº»(1~6) -> (1~8)
+            // ì„ êµ¬ì•ˆ 3 - ì œêµ¬ë ¥ 1 = 2
+            int NumBallCounts = UnityEngine.Random.Range(1, 7 + AbillityResult4); // ì¼ê²½ìš°ì—” ê¸°ë³¸(1~6) -> (1~8)
             if (Game.IsHomeAttack)
             {
                 Game.AwayCurrentPitcherBallCount += NumBallCounts;
@@ -402,16 +402,16 @@ public class GameModule : MonoBehaviour
 
             GameConditionsCheck(Game);
 
-            // °ÔÀÓ Á¾·á
-            // 9È¸¸»(18), 10È¸¸»(20), 11È¸¸»(22)¿¡ ¿¬Àå ÇÃ·¡±×¸¦ ²ö´Ù
+            // ê²Œì„ ì¢…ë£Œ
+            // 9íšŒë§(18), 10íšŒë§(20), 11íšŒë§(22)ì— ì—°ì¥ í”Œë˜ê·¸ë¥¼ ëˆë‹¤
             if (Game.Innings == 18 || Game.Innings == 20 || Game.Innings == 22)
             {
                 Game.IsExtend = false;
             }
             else if (Game.Innings == 19 || Game.Innings == 21 || Game.Innings == 23)
             {
-                // 10È¸ÃÊ(19), 11È¸ÃÊ(21), 12È¸ÃÊ(23)¿¡ ¿øÁ¤ÆÀÀÌ ÀÌ±â°í ÀÖ´Ù¸é 
-                // ÀÌ¹Ì È¨ÆÀÀÌ ÀÌ±ä ÈÄ Áõ°¡ÇÑ ÀÌ´×ÀÌ¹Ç·Î ±× ¹İ´ëÀÇ °æ¿ì¿¡´Â ¿¬Àå ÇÃ·¡±×¸¦ Å²´Ù
+                // 10íšŒì´ˆ(19), 11íšŒì´ˆ(21), 12íšŒì´ˆ(23)ì— ì›ì •íŒ€ì´ ì´ê¸°ê³  ìˆë‹¤ë©´ 
+                // ì´ë¯¸ í™ˆíŒ€ì´ ì´ê¸´ í›„ ì¦ê°€í•œ ì´ë‹ì´ë¯€ë¡œ ê·¸ ë°˜ëŒ€ì˜ ê²½ìš°ì—ëŠ” ì—°ì¥ í”Œë˜ê·¸ë¥¼ í‚¨ë‹¤
                 if (Game.HomeScore >= Game.AwayScore)
                 {
                     Game.IsExtend = true;
@@ -419,35 +419,35 @@ public class GameModule : MonoBehaviour
             }
 
             if (Game.Innings == 18 && Game.HomeScore > Game.AwayScore)
-            { // 9È¸¸» È¨ÆÀ Á¡¼ö ¾Õ¼­¸é ½Â¸® (³¡³»±â)
+            { // 9íšŒë§ í™ˆíŒ€ ì ìˆ˜ ì•ì„œë©´ ìŠ¹ë¦¬ (ëë‚´ê¸°)
                 StartCoroutine(GameEnd(t, Game));
             }
             if (Game.Innings == 20 && Game.HomeScore > Game.AwayScore)
-            { // 10È¸¸» È¨ÆÀ Á¡¼ö ¾Õ¼­¸é ½Â¸® (³¡³»±â)
+            { // 10íšŒë§ í™ˆíŒ€ ì ìˆ˜ ì•ì„œë©´ ìŠ¹ë¦¬ (ëë‚´ê¸°)
                 StartCoroutine(GameEnd(t, Game));
             }
             if (Game.Innings == 22 && Game.HomeScore > Game.AwayScore)
-            { // 11È¸¸» È¨ÆÀ Á¡¼ö ¾Õ¼­¸é ½Â¸® (³¡³»±â)
+            { // 11íšŒë§ í™ˆíŒ€ ì ìˆ˜ ì•ì„œë©´ ìŠ¹ë¦¬ (ëë‚´ê¸°)
                 StartCoroutine(GameEnd(t, Game));
             }
             if (Game.Innings == 24 && Game.HomeScore > Game.AwayScore)
-            { // 12È¸¸» È¨ÆÀ Á¡¼ö ¾Õ¼­¸é ½Â¸® (³¡³»±â)
+            { // 12íšŒë§ í™ˆíŒ€ ì ìˆ˜ ì•ì„œë©´ ìŠ¹ë¦¬ (ëë‚´ê¸°)
                 StartCoroutine(GameEnd(t, Game));
             }
             if (Game.Innings == 19 && Game.HomeScore < Game.AwayScore && Game.IsExtend == false)
-            { // 10È¸ÃÊ ½ÃÀÛ½Ã È®ÀÎ
+            { // 10íšŒì´ˆ ì‹œì‘ì‹œ í™•ì¸
                 StartCoroutine(GameEnd(t, Game));
             }
             if (Game.Innings == 21 && Game.HomeScore < Game.AwayScore && Game.IsExtend == false)
-            { // 11È¸ÃÊ ½ÃÀÛ½Ã È®ÀÎ
+            { // 11íšŒì´ˆ ì‹œì‘ì‹œ í™•ì¸
                 StartCoroutine(GameEnd(t, Game));
             }
             if (Game.Innings == 23 && Game.HomeScore < Game.AwayScore && Game.IsExtend == false)
-            { // 12È¸ÃÊ ½ÃÀÛ½Ã È®ÀÎ
+            { // 12íšŒì´ˆ ì‹œì‘ì‹œ í™•ì¸
                 StartCoroutine(GameEnd(t, Game));
             }
             if (Game.Innings == 25)
-            { //13È¸ÃÊ ½ÃÀÛ½Ã È®ÀÎ (¹«½ÂºÎ)
+            { //13íšŒì´ˆ ì‹œì‘ì‹œ í™•ì¸ (ë¬´ìŠ¹ë¶€)
                 StartCoroutine(GameEnd(t, Game));
             }
         }
@@ -455,34 +455,34 @@ public class GameModule : MonoBehaviour
 
     public void GameModuleUI(int t, Game Game)
     {
-        // Å¾
+        // íƒ‘
         HomeTeamScoreT.text = game.HomeScore.ToString();
         AwayTeamScoreT.text = game.AwayScore.ToString();
         if (!GameDirector.isPostSeason)
         {
-            GameInfoT.text = "Æä³ÍÆ®·¹ÀÌ½º";
+            GameInfoT.text = "í˜ë„ŒíŠ¸ë ˆì´ìŠ¤";
             if (GameDirector.currentDate.month == 3 && GameDirector.currentDate.day == 25)
             {
-                GameInfoT.text += "(°³¸·Àü)";
+                GameInfoT.text += "(ê°œë§‰ì „)";
             }
         } else
         {
             if (GameDirector.currentGame == 0 || GameDirector.currentGame == 1)
             {
-                GameInfoT.text = "¿ÍÀÏµåÄ«µå " + (GameDirector.currentGame + 1).ToString() + "Â÷Àü";
+                GameInfoT.text = "ì™€ì¼ë“œì¹´ë“œ " + (GameDirector.currentGame + 1).ToString() + "ì°¨ì „";
             } else if (GameDirector.currentGame >= 2 && GameDirector.currentGame <= 6) {
-                    GameInfoT.text = "ÁØÇÃ·¹ÀÌ¿ÀÇÁ " + (GameDirector.currentGame - 1).ToString() + "Â÷Àü";
+                    GameInfoT.text = "ì¤€í”Œë ˆì´ì˜¤í”„ " + (GameDirector.currentGame - 1).ToString() + "ì°¨ì „";
             } else if (GameDirector.currentGame >= 7 && GameDirector.currentGame <= 11) {
-                GameInfoT.text = "ÇÃ·¹ÀÌ¿ÀÇÁ " + (GameDirector.currentGame - 6).ToString() + "Â÷Àü";
+                GameInfoT.text = "í”Œë ˆì´ì˜¤í”„ " + (GameDirector.currentGame - 6).ToString() + "ì°¨ì „";
             } else if (GameDirector.currentGame >= 12 && GameDirector.currentGame <= 18)
             {
-                GameInfoT.text = "ÇÑ±¹½Ã¸®Áî " + (GameDirector.currentGame - 11).ToString() + "Â÷Àü";
+                GameInfoT.text = "í•œêµ­ì‹œë¦¬ì¦ˆ " + (GameDirector.currentGame - 11).ToString() + "ì°¨ì „";
             }
         }
         
-        CurrentDay.text = GameDirector.currentDate.year.ToString() + "³â " + GameDirector.currentDate.month.ToString() + "¿ù " + GameDirector.currentDate.day.ToString() + "ÀÏ " + DataToString.DayOfWeekToString(GameDirector.currentDate.dayOfWeek);
+        CurrentDay.text = GameDirector.currentDate.year.ToString() + "ë…„ " + GameDirector.currentDate.month.ToString() + "ì›” " + GameDirector.currentDate.day.ToString() + "ì¼ " + DataToString.DayOfWeekToString(GameDirector.currentDate.dayOfWeek);
 
-        // ÆÀ »ö»ó
+        // íŒ€ ìƒ‰ìƒ
         if (!GameDirector.isPostSeason)
         {
             HomeColor = TeamColor.SetTeamColor(GameDirector.schedule[t].homeTeam);
@@ -500,7 +500,7 @@ public class GameModule : MonoBehaviour
         AwayTeamNameC.color = AwayColor;
         AwayBatterTopPanel.GetComponent<Image>().color = AwayColor;
 
-        // ÆÀ ·Î°í
+        // íŒ€ ë¡œê³ 
         Image HomeEmblemPanel = GameObject.Find("HomeEmblemPanel").GetComponent<Image>();
         Image AwayEmblemPanel = GameObject.Find("AwayEmblemPanel").GetComponent<Image>();
         if (!GameDirector.isPostSeason)
@@ -513,7 +513,7 @@ public class GameModule : MonoBehaviour
             AwayEmblemPanel.sprite = TeamEmblem.GetEmblem(GameDirector.postSchedule[t].awayTeam);
         }
 
-        // Àü±¤ÆÇ
+        // ì „ê´‘íŒ
         if (!GameDirector.isPostSeason)
         {
             HomeTeamNameB.text = DataToString.TeamToString(GameDirector.schedule[t].homeTeam);
@@ -534,7 +534,7 @@ public class GameModule : MonoBehaviour
         }
         for (int i = 1; i <= Game.Innings; i++)
         {
-            if (i % 2 == 1) { // ÃÊ
+            if (i % 2 == 1) { // ì´ˆ
                 AwayInningScore[i / 2].text = game.InningScore[0, i / 2].ToString();
                 if (i == Game.Innings)
                 {
@@ -543,7 +543,7 @@ public class GameModule : MonoBehaviour
                 {
                     AwayInningScore[i / 2].color = Color.white;
                 }
-            } else { // ¸»
+            } else { // ë§
                 HomeInningScore[(i / 2) - 1].text = game.InningScore[1, (i / 2) - 1].ToString();
                 if (i == Game.Innings)
                 {
@@ -561,7 +561,7 @@ public class GameModule : MonoBehaviour
             HomeRHEB[i].text = game.RHEB[1, i].ToString();
         }
 
-        // ½ºÄÚ¾îº¸µå
+        // ìŠ¤ì½”ì–´ë³´ë“œ
         if (!GameDirector.isPostSeason)
         {
             HomeTeamNameC.text = DataToString.TeamToString(GameDirector.schedule[t].homeTeam);
@@ -574,10 +574,10 @@ public class GameModule : MonoBehaviour
         HomeTeamScore.text = game.HomeScore.ToString();
         AwayTeamScore.text = game.AwayScore.ToString();
 
-        // ¸Ş½ÃÁö
+        // ë©”ì‹œì§€
         Message.text = game.Message;
 
-        // ¾Æ¿ô
+        // ì•„ì›ƒ
         if (Game.OutCount == 0) {
             LeftOut.color = Color.gray;
             RightOut.color = Color.gray;
@@ -589,7 +589,7 @@ public class GameModule : MonoBehaviour
             RightOut.color = Color.red;
         }
 
-        // Åõ¼ö±³Ã¼
+        // íˆ¬ìˆ˜êµì²´
         if (isPitChange)
         {
             isPitChange = false;
@@ -599,7 +599,7 @@ public class GameModule : MonoBehaviour
             SCPanel.SetActive(false);
         }
 
-        // º£ÀÌ½º
+        // ë² ì´ìŠ¤
         if (Game.isBase1 == true) {
             Base1.color = CBase;
         } else {
@@ -616,41 +616,41 @@ public class GameModule : MonoBehaviour
             Base3.color = Color.gray;
         }
 
-        // °ø¼ö
+        // ê³µìˆ˜
         if (!Game.IsGameOver)
         {
             if (Game.IsHomeAttack)
             {
                 if (!GameDirector.isPostSeason)
                 {
-                    InningAttack.text = (Game.Innings / 2) + "È¸¸» " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " °ø°İ";
+                    InningAttack.text = (Game.Innings / 2) + "íšŒë§ " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " ê³µê²©";
                 } else
                 {
-                    InningAttack.text = (Game.Innings / 2) + "È¸¸» " + DataToString.TeamToString(GameDirector.postSchedule[t].homeTeam) + " °ø°İ";
+                    InningAttack.text = (Game.Innings / 2) + "íšŒë§ " + DataToString.TeamToString(GameDirector.postSchedule[t].homeTeam) + " ê³µê²©";
                 }
-                CurrentInning.text = (Game.Innings / 2) + "È¸¸»";
+                CurrentInning.text = (Game.Innings / 2) + "íšŒë§";
                 PitName.color = AwayColor;
             }
             else
             {
                 if (!GameDirector.isPostSeason)
                 {
-                    InningAttack.text = ((Game.Innings / 2) + 1) + "È¸ÃÊ " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " °ø°İ";
+                    InningAttack.text = ((Game.Innings / 2) + 1) + "íšŒì´ˆ " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " ê³µê²©";
                 } else
                 {
-                    InningAttack.text = ((Game.Innings / 2) + 1) + "È¸ÃÊ " + DataToString.TeamToString(GameDirector.postSchedule[t].awayTeam) + " °ø°İ";
+                    InningAttack.text = ((Game.Innings / 2) + 1) + "íšŒì´ˆ " + DataToString.TeamToString(GameDirector.postSchedule[t].awayTeam) + " ê³µê²©";
                 }
-                CurrentInning.text = ((Game.Innings / 2) + 1) + "È¸ÃÊ";
+                CurrentInning.text = ((Game.Innings / 2) + 1) + "íšŒì´ˆ";
                 PitName.color = HomeColor;
             }
         } else
         {
-            InningAttack.text = "°æ±â Á¾·á"; // ³ªÁß¿¡ °æ±â°á°ú Àû¾îÁÖ¸é µÉµí?
+            InningAttack.text = "ê²½ê¸° ì¢…ë£Œ"; // ë‚˜ì¤‘ì— ê²½ê¸°ê²°ê³¼ ì ì–´ì£¼ë©´ ë ë“¯?
         }
         
         if (!GameDirector.isPostSeason)
         {
-            // ÇöÀç Åõ¼ö
+            // í˜„ì¬ íˆ¬ìˆ˜
             for (int i = 0; i < GameDirector.pitcherCount; i++)
             {
                 if ((Game.IsHomeAttack == true && GameDirector.pitcher[i].team == GameDirector.schedule[t].awayTeam && GameDirector.pitcher[i].posInTeam == game.AwayCurrentPitcher) ||
@@ -690,7 +690,7 @@ public class GameModule : MonoBehaviour
             }
         } else
         {
-            // ÇöÀç Åõ¼ö
+            // í˜„ì¬ íˆ¬ìˆ˜
             for (int i = 0; i < GameDirector.pitcherCount; i++)
             {
                 if ((Game.IsHomeAttack == true && GameDirector.pitcher[i].team == GameDirector.postSchedule[t].awayTeam && GameDirector.pitcher[i].posInTeam == game.AwayCurrentPitcher) ||
@@ -732,7 +732,7 @@ public class GameModule : MonoBehaviour
 
         if (!GameDirector.isPostSeason)
         {
-            // È¨ÆÀ
+            // í™ˆíŒ€
             for (int n = 0; n < GameDirector.batterCount; n++)
             {
                 if (GameDirector.batter[n].team == GameDirector.schedule[t].homeTeam)
@@ -741,7 +741,7 @@ public class GameModule : MonoBehaviour
                     {
                         Game.TargetBatterIndex = n;
                         HomeBResult.text = GameDirector.batter[Game.TargetBatterIndex].todayResult;
-                        HomeBResultNum.text = GameDirector.batter[n].name + " ¿À´Ã ±â·Ï (" + GameDirector.batter[Game.TargetBatterIndex].todayHit + "/" + GameDirector.batter[Game.TargetBatterIndex].todayAB + ")";
+                        HomeBResultNum.text = GameDirector.batter[n].name + " ì˜¤ëŠ˜ ê¸°ë¡ (" + GameDirector.batter[Game.TargetBatterIndex].todayHit + "/" + GameDirector.batter[Game.TargetBatterIndex].todayAB + ")";
                         AwayBResult.text = "";
                         AwayBResultNum.text = "";
                     }
@@ -765,7 +765,7 @@ public class GameModule : MonoBehaviour
                 }
             }
 
-            // ¿øÁ¤ÆÀ
+            // ì›ì •íŒ€
             for (int n = 0; n < GameDirector.batterCount; n++)
             {
                 if (GameDirector.batter[n].team == GameDirector.schedule[t].awayTeam)
@@ -774,7 +774,7 @@ public class GameModule : MonoBehaviour
                     {
                         Game.TargetBatterIndex = n;
                         AwayBResult.text = GameDirector.batter[Game.TargetBatterIndex].todayResult;
-                        AwayBResultNum.text = GameDirector.batter[n].name + " ¿À´Ã ±â·Ï (" + GameDirector.batter[Game.TargetBatterIndex].todayHit + "/" + GameDirector.batter[Game.TargetBatterIndex].todayAB + ")";
+                        AwayBResultNum.text = GameDirector.batter[n].name + " ì˜¤ëŠ˜ ê¸°ë¡ (" + GameDirector.batter[Game.TargetBatterIndex].todayHit + "/" + GameDirector.batter[Game.TargetBatterIndex].todayAB + ")";
                         HomeBResult.text = "";
                         HomeBResultNum.text = "";
                     }
@@ -799,7 +799,7 @@ public class GameModule : MonoBehaviour
             }
         } else
         {
-            // È¨ÆÀ
+            // í™ˆíŒ€
             for (int n = 0; n < GameDirector.batterCount; n++)
             {
                 if (GameDirector.batter[n].team == GameDirector.postSchedule[t].homeTeam)
@@ -808,7 +808,7 @@ public class GameModule : MonoBehaviour
                     {
                         Game.TargetBatterIndex = n;
                         HomeBResult.text = GameDirector.batter[Game.TargetBatterIndex].todayResult;
-                        HomeBResultNum.text = GameDirector.batter[n].name + " ¿À´Ã ±â·Ï (" + GameDirector.batter[Game.TargetBatterIndex].todayHit + "/" + GameDirector.batter[Game.TargetBatterIndex].todayAB + ")";
+                        HomeBResultNum.text = GameDirector.batter[n].name + " ì˜¤ëŠ˜ ê¸°ë¡ (" + GameDirector.batter[Game.TargetBatterIndex].todayHit + "/" + GameDirector.batter[Game.TargetBatterIndex].todayAB + ")";
                         AwayBResult.text = "";
                         AwayBResultNum.text = "";
                     }
@@ -832,7 +832,7 @@ public class GameModule : MonoBehaviour
                 }
             }
 
-            // ¿øÁ¤ÆÀ
+            // ì›ì •íŒ€
             for (int n = 0; n < GameDirector.batterCount; n++)
             {
                 if (GameDirector.batter[n].team == GameDirector.postSchedule[t].awayTeam)
@@ -841,7 +841,7 @@ public class GameModule : MonoBehaviour
                     {
                         Game.TargetBatterIndex = n;
                         AwayBResult.text = GameDirector.batter[Game.TargetBatterIndex].todayResult;
-                        AwayBResultNum.text = GameDirector.batter[n].name + " ¿À´Ã ±â·Ï (" + GameDirector.batter[Game.TargetBatterIndex].todayHit + "/" + GameDirector.batter[Game.TargetBatterIndex].todayAB + ")";
+                        AwayBResultNum.text = GameDirector.batter[n].name + " ì˜¤ëŠ˜ ê¸°ë¡ (" + GameDirector.batter[Game.TargetBatterIndex].todayHit + "/" + GameDirector.batter[Game.TargetBatterIndex].todayAB + ")";
                         HomeBResult.text = "";
                         HomeBResultNum.text = "";
                     }
@@ -869,27 +869,27 @@ public class GameModule : MonoBehaviour
 
     IEnumerator GameEnd(int t, Game game)
     {
-        // UI ¹× ÇÃ·¡±× °»½Å
+        // UI ë° í”Œë˜ê·¸ ê°±ì‹ 
         GameDirector.remainGames--;
         GameMode = 0;
         game.IsGameOver = true;
-        game.Message = "°æ±â°¡ Á¾·á µÇ¾ú½À´Ï´Ù.";
+        game.Message = "ê²½ê¸°ê°€ ì¢…ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤.";
         ProcessPanel.SetActive(false);
         //GameOverCanvas.SetActive(true);
         ResultPanel.SetActive(true);
         PitcherPanel.SetActive(false);
 
-        // ¸ğµâ Àü±¤ÆÇ ¼öÁ¤
+        // ëª¨ë“ˆ ì „ê´‘íŒ ìˆ˜ì •
         if (game.Innings == 18 && game.HomeScore > game.AwayScore && game.InningScore[1, 8] == 0)
         {
-            game.Innings--; // ³¡³»±â ¾ÈÅ¸¸é ¾ø¾Ö¸é ¾ÈµÇ´Âµ¥ 9È¸ÃÊ¿¡ ³¡³µÀ¸¸é ¾ø¾Ö¾ßÇÔ
+            game.Innings--; // ëë‚´ê¸° ì•ˆíƒ€ë©´ ì—†ì• ë©´ ì•ˆë˜ëŠ”ë° 9íšŒì´ˆì— ëë‚¬ìœ¼ë©´ ì—†ì• ì•¼í•¨
         }
         if (game.Innings == 19 || game.Innings == 21 || game.Innings == 23 || game.Innings == 25)
         {
-            game.Innings--; // 10È¸ÃÊ, 11È¸ÃÊ, 12È¸ÃÊ, 13È¸ÃÊ¿¡ ³¡³µ´Ù´Â°Ç ±× ÀüÀÌ´×¿¡ ³¡³²
+            game.Innings--; // 10íšŒì´ˆ, 11íšŒì´ˆ, 12íšŒì´ˆ, 13íšŒì´ˆì— ëë‚¬ë‹¤ëŠ”ê±´ ê·¸ ì „ì´ë‹ì— ëë‚¨
         }
 
-        // ½ºÄÉÁì¿¡ Á¡¼ö ±âÀÔ
+        // ìŠ¤ì¼€ì¥´ì— ì ìˆ˜ ê¸°ì…
         if (!GameDirector.isPostSeason)
         {
             GameDirector.schedule[t].homeScore = game.HomeScore;
@@ -900,15 +900,15 @@ public class GameModule : MonoBehaviour
             GameDirector.postSchedule[t].awayScore = game.AwayScore;
         }
 
-        // °æ±â °á°ú Ãâ·Â
+        // ê²½ê¸° ê²°ê³¼ ì¶œë ¥
         if (game.HomeScore > game.AwayScore)
         {
             if (!GameDirector.isPostSeason)
             {
-                ResultInformation.text = game.HomeScore + ":" + game.AwayScore + " " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " ½Â¸®";
+                ResultInformation.text = game.HomeScore + ":" + game.AwayScore + " " + DataToString.TeamToString(GameDirector.schedule[t].homeTeam) + " ìŠ¹ë¦¬";
             } else
             {
-                ResultInformation.text = game.HomeScore + ":" + game.AwayScore + " " + DataToString.TeamToString(GameDirector.postSchedule[t].homeTeam) + " ½Â¸®";
+                ResultInformation.text = game.HomeScore + ":" + game.AwayScore + " " + DataToString.TeamToString(GameDirector.postSchedule[t].homeTeam) + " ìŠ¹ë¦¬";
             }
             
         }
@@ -916,18 +916,18 @@ public class GameModule : MonoBehaviour
         {
             if (!GameDirector.isPostSeason)
             {
-                ResultInformation.text = game.HomeScore + ":" + game.AwayScore + " " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " ½Â¸®";
+                ResultInformation.text = game.HomeScore + ":" + game.AwayScore + " " + DataToString.TeamToString(GameDirector.schedule[t].awayTeam) + " ìŠ¹ë¦¬";
             } else
             {
-                ResultInformation.text = game.HomeScore + ":" + game.AwayScore + " " + DataToString.TeamToString(GameDirector.postSchedule[t].awayTeam) + " ½Â¸®";
+                ResultInformation.text = game.HomeScore + ":" + game.AwayScore + " " + DataToString.TeamToString(GameDirector.postSchedule[t].awayTeam) + " ìŠ¹ë¦¬";
             }
         }
         else if (game.HomeScore == game.AwayScore)
         {
-            ResultInformation.text = game.HomeScore + ":" + game.AwayScore + " ¹«½ÂºÎ";
+            ResultInformation.text = game.HomeScore + ":" + game.AwayScore + " ë¬´ìŠ¹ë¶€";
         }
 
-        // ¹ë·ù ¸ŞÀÏ
+        // ë°¸ë¥˜ ë©”ì¼
         if (!GameDirector.isPostSeason && !GameDirector.isSimulation)
         {
             if (GameDirector.schedule[t].homeTeam == GameDirector.myTeam && game.HomeScore - game.AwayScore >= 10)
@@ -958,26 +958,26 @@ public class GameModule : MonoBehaviour
                 {
                     if (game.HomeScore > game.AwayScore && GameDirector.pitcher[i].posInTeam == game.WhoWinCondition)
                     {
-                        WinnerP.text = "½Â¸® Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        WinnerP.text = "ìŠ¹ë¦¬ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         if (game.HomeCurrentPitcherInn == 27 && game.HomeCurrentPitcherEarn == 0)
                         {
-                            WinnerP.text += " (¿ÏºÀ)";
+                            WinnerP.text += " (ì™„ë´‰)";
                         }
                         else if (game.HomeCurrentPitcherInn == 27 && game.HomeCurrentPitcherEarn != 0)
                         {
-                            WinnerP.text += " (¿ÏÅõ)";
+                            WinnerP.text += " (ì™„íˆ¬)";
                         }
                         GameDirector.pitcher[i].win++;
                     }
                     else if (game.HomeScore < game.AwayScore && GameDirector.pitcher[i].posInTeam == game.WhoLoseCondition)
                     {
-                        LoserP.text = "ÆĞÀü Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        LoserP.text = "íŒ¨ì „ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         GameDirector.pitcher[i].lose++;
                     }
 
                     if (game.HomeScore > game.AwayScore && GameDirector.pitcher[i].posInTeam == game.HomeCurrentHoldPitcher && GameDirector.pitcher[i].posInTeam == game.HomeCurrentPitcher && GameDirector.pitcher[i].posInTeam != game.WhoWinCondition)
                     {
-                        SaveP.text = "¼¼ÀÌºê Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        SaveP.text = "ì„¸ì´ë¸Œ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         GameDirector.pitcher[i].save++;
                         isSaveP = true;
                     }
@@ -986,25 +986,25 @@ public class GameModule : MonoBehaviour
                 {
                     if (game.HomeScore > game.AwayScore && GameDirector.pitcher[i].posInTeam == game.WhoLoseCondition)
                     {
-                        LoserP.text = "ÆĞÀü Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        LoserP.text = "íŒ¨ì „ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         GameDirector.pitcher[i].lose++;
                     }
                     else if (game.HomeScore < game.AwayScore && GameDirector.pitcher[i].posInTeam == game.WhoWinCondition)
                     {
-                        WinnerP.text = "½Â¸® Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        WinnerP.text = "ìŠ¹ë¦¬ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         if (game.AwayCurrentPitcherInn == 27 && game.AwayCurrentPitcherEarn == 0)
                         {
-                            WinnerP.text += " (¿ÏºÀ)";
+                            WinnerP.text += " (ì™„ë´‰)";
                         }
                         else if (game.AwayCurrentPitcherInn == 27 && game.AwayCurrentPitcherEarn != 0)
                         {
-                            WinnerP.text += " (¿ÏÅõ)";
+                            WinnerP.text += " (ì™„íˆ¬)";
                         }
                         GameDirector.pitcher[i].win++;
                     }
                     if (game.HomeScore < game.AwayScore && GameDirector.pitcher[i].posInTeam == game.AwayCurrentHoldPitcher && GameDirector.pitcher[i].posInTeam == game.AwayCurrentPitcher && GameDirector.pitcher[i].posInTeam != game.WhoWinCondition)
                     {
-                        SaveP.text = "¼¼ÀÌºê Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        SaveP.text = "ì„¸ì´ë¸Œ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         GameDirector.pitcher[i].save++;
                         isSaveP = true;
                     }
@@ -1018,26 +1018,26 @@ public class GameModule : MonoBehaviour
                 {
                     if (game.HomeScore > game.AwayScore && GameDirector.pitcher[i].posInTeam == game.WhoWinCondition)
                     {
-                        WinnerP.text = "½Â¸® Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        WinnerP.text = "ìŠ¹ë¦¬ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         if (game.HomeCurrentPitcherInn == 27 && game.HomeCurrentPitcherEarn == 0)
                         {
-                            WinnerP.text += " (¿ÏºÀ)";
+                            WinnerP.text += " (ì™„ë´‰)";
                         }
                         else if (game.HomeCurrentPitcherInn == 27 && game.HomeCurrentPitcherEarn != 0)
                         {
-                            WinnerP.text += " (¿ÏÅõ)";
+                            WinnerP.text += " (ì™„íˆ¬)";
                         }
                         //GameDirector.pitcher[i].win++;
                     }
                     else if (game.HomeScore < game.AwayScore && GameDirector.pitcher[i].posInTeam == game.WhoLoseCondition)
                     {
-                        LoserP.text = "ÆĞÀü Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        LoserP.text = "íŒ¨ì „ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         //GameDirector.pitcher[i].lose++;
                     }
 
                     if (game.HomeScore > game.AwayScore && GameDirector.pitcher[i].posInTeam == game.HomeCurrentHoldPitcher && GameDirector.pitcher[i].posInTeam == game.HomeCurrentPitcher && GameDirector.pitcher[i].posInTeam != game.WhoWinCondition)
                     {
-                        SaveP.text = "¼¼ÀÌºê Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        SaveP.text = "ì„¸ì´ë¸Œ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         //GameDirector.pitcher[i].save++;
                         isSaveP = true;
                     }
@@ -1046,25 +1046,25 @@ public class GameModule : MonoBehaviour
                 {
                     if (game.HomeScore > game.AwayScore && GameDirector.pitcher[i].posInTeam == game.WhoLoseCondition)
                     {
-                        LoserP.text = "ÆĞÀü Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        LoserP.text = "íŒ¨ì „ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         //GameDirector.pitcher[i].lose++;
                     }
                     else if (game.HomeScore < game.AwayScore && GameDirector.pitcher[i].posInTeam == game.WhoWinCondition)
                     {
-                        WinnerP.text = "½Â¸® Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        WinnerP.text = "ìŠ¹ë¦¬ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         if (game.AwayCurrentPitcherInn == 27 && game.AwayCurrentPitcherEarn == 0)
                         {
-                            WinnerP.text += " (¿ÏºÀ)";
+                            WinnerP.text += " (ì™„ë´‰)";
                         }
                         else if (game.AwayCurrentPitcherInn == 27 && game.AwayCurrentPitcherEarn != 0)
                         {
-                            WinnerP.text += " (¿ÏÅõ)";
+                            WinnerP.text += " (ì™„íˆ¬)";
                         }
                         //GameDirector.pitcher[i].win++;
                     }
                     if (game.HomeScore < game.AwayScore && GameDirector.pitcher[i].posInTeam == game.AwayCurrentHoldPitcher && GameDirector.pitcher[i].posInTeam == game.AwayCurrentPitcher && GameDirector.pitcher[i].posInTeam != game.WhoWinCondition)
                     {
-                        SaveP.text = "¼¼ÀÌºê Åõ¼ö: " + GameDirector.pitcher[i].name;
+                        SaveP.text = "ì„¸ì´ë¸Œ íˆ¬ìˆ˜: " + GameDirector.pitcher[i].name;
                         //GameDirector.pitcher[i].save++;
                         isSaveP = true;
                     }
@@ -1072,20 +1072,20 @@ public class GameModule : MonoBehaviour
             }
         }
         
-        // ºñ±â¸é Ãâ·Â ¾ÈÇÔ
+        // ë¹„ê¸°ë©´ ì¶œë ¥ ì•ˆí•¨
         if (game.HomeScore == game.AwayScore)
         {
             Destroy(WinnerP.gameObject);
             Destroy(LoserP.gameObject);
         }
 
-        // ¼¼ÀÌºê ¾øÀ¸¸é Ãâ·Â ¾ÈÇÔ
+        // ì„¸ì´ë¸Œ ì—†ìœ¼ë©´ ì¶œë ¥ ì•ˆí•¨
         if (!isSaveP)
         {
             Destroy(SaveP.gameObject);
         }
 
-        // °æ±â ±â·Ï ¾÷µ¥ÀÌÆ® ¹× ¼±¹ßÅõ¼ö °»½Å
+        // ê²½ê¸° ê¸°ë¡ ì—…ë°ì´íŠ¸ ë° ì„ ë°œíˆ¬ìˆ˜ ê°±ì‹ 
         if (!GameDirector.isPostSeason)
         {
             if (game.HomeScore > game.AwayScore)
@@ -1129,7 +1129,7 @@ public class GameModule : MonoBehaviour
         }
         
 
-        // Å¸ÀÚÀÇ ¿À´Ã ±â·Ï ÃÊ±âÈ­
+        // íƒ€ìì˜ ì˜¤ëŠ˜ ê¸°ë¡ ì´ˆê¸°í™”
         for (int i = 0; i<GameDirector.batterCount; i++)
         {
             if (!GameDirector.isPostSeason && GameDirector.batter[i].team == GameDirector.myTeam && !GameDirector.isSimulation)
@@ -1149,7 +1149,7 @@ public class GameModule : MonoBehaviour
             
         }
 
-        // Åõ¼öÀÇ ¿À´Ã ±â·Ï ÃÊ±âÈ­
+        // íˆ¬ìˆ˜ì˜ ì˜¤ëŠ˜ ê¸°ë¡ ì´ˆê¸°í™”
         for (int i = 0; i < GameDirector.pitcherCount; i++)
         {
             GameDirector.pitcher[i].isAleadyAppear = false;
@@ -1158,7 +1158,7 @@ public class GameModule : MonoBehaviour
             GameDirector.pitcher[i].WHIP = (float)(GameDirector.pitcher[i].hitAllowed + GameDirector.pitcher[i].baseOnBall) / (float)(GameDirector.pitcher[i].inningsPitched1 + k);
         }
 
-        // ÇØ´ç ½ºÄÉÁì °ÔÀÓ Á¾·á Ã³¸®
+        // í•´ë‹¹ ìŠ¤ì¼€ì¥´ ê²Œì„ ì¢…ë£Œ ì²˜ë¦¬
         if (!GameDirector.isPostSeason)
         {
             GameDirector.schedule[t].isEnd = true;
@@ -1169,7 +1169,7 @@ public class GameModule : MonoBehaviour
         
         if (!GameDirector.isPostSeason)
         {
-            // ³» °ÔÀÓÀÌ ³¡³µÀ¸¸é ¹öÆ° ´©¸¦¶§ ±îÁö ´ë±â
+            // ë‚´ ê²Œì„ì´ ëë‚¬ìœ¼ë©´ ë²„íŠ¼ ëˆ„ë¥¼ë•Œ ê¹Œì§€ ëŒ€ê¸°
             if (!GameDirector.isSimulation)
             {
                 GameOverPanel.SetActive(true);
@@ -1177,14 +1177,14 @@ public class GameModule : MonoBehaviour
                 isLeave = false;
             }
 
-            // ³» °ÔÀÓÀÌ ³¡³µÀ¸´Ï ¿À´Ã ÀÏÁ¤ ³ª¸ÓÁö °ÔÀÓµµ ÁøÇà
+            // ë‚´ ê²Œì„ì´ ëë‚¬ìœ¼ë‹ˆ ì˜¤ëŠ˜ ì¼ì • ë‚˜ë¨¸ì§€ ê²Œì„ë„ ì§„í–‰
             if ((GameDirector.schedule[t].homeTeam == GameDirector.myTeam || GameDirector.schedule[t].awayTeam == GameDirector.myTeam) && !GameDirector.isSimulation)
             {
                 GameDirector.isSimulation = true;
                 GameDirector.tempMyTeam = GameDirector.myTeam;
             }
 
-            // ³²Àº °æ±â¸¦ ¸ğµâ Àç½ÇÇà ÇÏ¸é¼­ ÁøÇà
+            // ë‚¨ì€ ê²½ê¸°ë¥¼ ëª¨ë“ˆ ì¬ì‹¤í–‰ í•˜ë©´ì„œ ì§„í–‰
             for (int i = 0; i < GameDirector.totalMatchCount; i++)
             {
                 if (GameDirector.schedule[i].dates.year == GameDirector.schedule[t].dates.year &&
@@ -1199,21 +1199,21 @@ public class GameModule : MonoBehaviour
                 }
             }
 
-            // ¸ğµç °æ±â°¡ ³¡³µÀ¸¸é ¿©±â·Î ºüÁ®³ª¿È
+            // ëª¨ë“  ê²½ê¸°ê°€ ëë‚¬ìœ¼ë©´ ì—¬ê¸°ë¡œ ë¹ ì ¸ë‚˜ì˜´
             if (GameDirector.isSimulation)
             {
                 loadSlider.value = 5 - GameDirector.remainGames;
                 if (GameDirector.remainGames == 0)
                 {
-                    LoadMessage.text = "¸ğµç °æ±â°¡ Á¾·á µÇ¾ú½À´Ï´Ù.";
+                    LoadMessage.text = "ëª¨ë“  ê²½ê¸°ê°€ ì¢…ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤.";
                     ALLENDPanel.SetActive(true);
                 }
                 yield return new WaitUntil(() => Leaving());
                 isLeave = false;
             }
-        } else // Æ÷½ºÆ® ½ÃÁğ ÀÏ°æ¿ì
+        } else // í¬ìŠ¤íŠ¸ ì‹œì¦Œ ì¼ê²½ìš°
         {
-            if (t < 2) // ¿ÍÀÏµåÄ«µå
+            if (t < 2) // ì™€ì¼ë“œì¹´ë“œ
             {
                 if (t==0)
                 {
@@ -1271,7 +1271,7 @@ public class GameModule : MonoBehaviour
                         GameDirector.postSchedule[6].awayTeam = GameDirector.postSchedule[t].awayTeam;
                     }
                 }
-            } else if (t >= 2 && t <= 6) // ÁØÇÃ·¹ÀÌ¿ÀÇÁ
+            } else if (t >= 2 && t <= 6) // ì¤€í”Œë ˆì´ì˜¤í”„
             {
                 if (game.HomeScore > game.AwayScore)
                 {
@@ -1293,7 +1293,7 @@ public class GameModule : MonoBehaviour
                         GameDirector.UpTeamWin++;
                     }
                 }
-                if (GameDirector.UpTeamWin >= 3) // 3¼±½Â
+                if (GameDirector.UpTeamWin >= 3) // 3ì„ ìŠ¹
                 {
                     GameDirector.UpTeamWin = 0;
                     GameDirector.DownTeamWin = 0;
@@ -1348,7 +1348,7 @@ public class GameModule : MonoBehaviour
                     GameDirector.postSchedule[11].awayTeam = GameDirector.postSchedule[t].DownTeam;
                 }
             }
-            else if (t >= 7 && t <= 11) // ÇÃ·¹ÀÌ¿ÀÇÁ
+            else if (t >= 7 && t <= 11) // í”Œë ˆì´ì˜¤í”„
             {
                 if (game.HomeScore > game.AwayScore)
                 {
@@ -1372,7 +1372,7 @@ public class GameModule : MonoBehaviour
                         GameDirector.UpTeamWin++;
                     }
                 }
-                if (GameDirector.UpTeamWin >= 3) // 3¼±½Â
+                if (GameDirector.UpTeamWin >= 3) // 3ì„ ìŠ¹
                 {
                     GameDirector.UpTeamWin = 0;
                     GameDirector.DownTeamWin = 0;
@@ -1441,7 +1441,7 @@ public class GameModule : MonoBehaviour
                     GameDirector.postSchedule[18].awayTeam = GameDirector.postSchedule[t].DownTeam;
                 }
             }
-            else if (t >= 12 && t <= 18) // ÇÑ±¹½Ã¸®Áî
+            else if (t >= 12 && t <= 18) // í•œêµ­ì‹œë¦¬ì¦ˆ
             {
                 if (game.HomeScore > game.AwayScore)
                 {
@@ -1465,7 +1465,7 @@ public class GameModule : MonoBehaviour
                         GameDirector.UpTeamWin++;
                     }
                 }
-                if (GameDirector.UpTeamWin >= 4) // 4¼±½Â
+                if (GameDirector.UpTeamWin >= 4) // 4ì„ ìŠ¹
                 {
                     GameDirector.UpTeamWin = 0;
                     GameDirector.DownTeamWin = 0;
@@ -1509,7 +1509,7 @@ public class GameModule : MonoBehaviour
                 }
             }
 
-            // ³» °ÔÀÓÀÌ ³¡³µÀ¸¸é ¹öÆ° ´©¸¦¶§ ±îÁö ´ë±â
+            // ë‚´ ê²Œì„ì´ ëë‚¬ìœ¼ë©´ ë²„íŠ¼ ëˆ„ë¥¼ë•Œ ê¹Œì§€ ëŒ€ê¸°
             if (!GameDirector.isSimulation)
             {
                 GameOverPanel.SetActive(true);
@@ -1518,12 +1518,12 @@ public class GameModule : MonoBehaviour
             }
         }
 
-        // ³¯Â¥ ¾÷µ¥ÀÌÆ®
+        // ë‚ ì§œ ì—…ë°ì´íŠ¸
         GameDirector.currentDate = CreateData.UpdateDate(GameDirector.currentDate);
         GameDirector.isSimulation = false;
         GameDirector.myTeam = GameDirector.tempMyTeam;
 
-        // ¸ğµç Åõ¼ö Ã¼·Â È¸º¹
+        // ëª¨ë“  íˆ¬ìˆ˜ ì²´ë ¥ íšŒë³µ
         for (int i = 0; i < GameDirector.pitcherCount; i++)
         {
             GameDirector.pitcher[i].HP += 15;
@@ -1533,17 +1533,17 @@ public class GameModule : MonoBehaviour
             }
         }
 
-        // ÀúÀå ÈÄ ¸ŞÀÎ ¾ÀÀ¸·Î ³ª°¡±â
+        // ì €ì¥ í›„ ë©”ì¸ ì”¬ìœ¼ë¡œ ë‚˜ê°€ê¸°
         SaveLoad.SaveData();
         SceneManager.LoadScene("Main");
     }
 
     void GameConditionsCheck(Game Game)
     {
-        // ½Â¸® Åõ¼ö ÆĞÀü Åõ¼ö Á¶°Ç
+        // ìŠ¹ë¦¬ íˆ¬ìˆ˜ íŒ¨ì „ íˆ¬ìˆ˜ ì¡°ê±´
         if (Game.HomeScore > Game.AwayScore)
         {
-            // »õ·Î Ãß°¡ÇÑ µÎ if¹® (Å×½ºÆ® ÇØ¾ßÇÔ)
+            // ìƒˆë¡œ ì¶”ê°€í•œ ë‘ ifë¬¸ (í…ŒìŠ¤íŠ¸ í•´ì•¼í•¨)
             //if (!Game.isHomeLead && Game.WhoLoseCondition != 1000)
             //{
             //    Game.WhoLoseCondition = 1000;
@@ -1552,7 +1552,7 @@ public class GameModule : MonoBehaviour
             //{
             //    Game.isHomeLead = true;
             //}
-            // È¨ Åõ¼ö´Â 5È¸ÃÊ(9)¸¦ ³¡³ÂÀ»¶§ ºÎÅÍ ½Â¸® ¿ä°Ç
+            // í™ˆ íˆ¬ìˆ˜ëŠ” 5íšŒì´ˆ(9)ë¥¼ ëëƒˆì„ë•Œ ë¶€í„° ìŠ¹ë¦¬ ìš”ê±´
             if (Game.Innings >= 10 && Game.WhoWinCondition == 1000)
             {
                 Game.WhoWinCondition = Game.HomeCurrentPitcher;
@@ -1564,7 +1564,7 @@ public class GameModule : MonoBehaviour
         }
         else if (Game.HomeScore < Game.AwayScore)
         {
-            // »õ·Î Ãß°¡ÇÑ µÎ if¹® (Å×½ºÆ® ÇØ¾ßÇÔ)
+            // ìƒˆë¡œ ì¶”ê°€í•œ ë‘ ifë¬¸ (í…ŒìŠ¤íŠ¸ í•´ì•¼í•¨)
             //if (Game.isHomeLead && Game.WhoLoseCondition != 1000)
             //{
             //    Game.WhoLoseCondition = 1000;
@@ -1573,7 +1573,7 @@ public class GameModule : MonoBehaviour
             //{
             //    Game.isHomeLead = false;
             //}
-            // ¿øÁ¤ Åõ¼ö´Â 5È¸¸»(10)À» ³¡³ÂÀ»¶§ ºÎÅÍ ½Â¸® ¿ä°Ç
+            // ì›ì • íˆ¬ìˆ˜ëŠ” 5íšŒë§(10)ì„ ëëƒˆì„ë•Œ ë¶€í„° ìŠ¹ë¦¬ ìš”ê±´
             if (Game.Innings >= 11 && Game.WhoWinCondition == 1000)
             {
                 Game.WhoWinCondition = Game.AwayCurrentPitcher;
@@ -1585,12 +1585,12 @@ public class GameModule : MonoBehaviour
         }
         else if ((Game.HomeScore == Game.AwayScore))
         {
-            // ÃÊ±â »óÅÂ È¤Àº µ¿Á¡½Ã ÃÊ±âÈ­
+            // ì´ˆê¸° ìƒíƒœ í˜¹ì€ ë™ì ì‹œ ì´ˆê¸°í™”
             Game.WhoWinCondition = 1000;
             Game.WhoLoseCondition = 1000;
         }
 
-        // È¦µå Åõ¼ö Á¶°Ç
+        // í™€ë“œ íˆ¬ìˆ˜ ì¡°ê±´
         if ((Game.HomeScore - 3 <= Game.AwayScore) &&
             (Game.HomeScore > Game.AwayScore) &&
             Game.Innings >= 11 &&
@@ -1598,7 +1598,7 @@ public class GameModule : MonoBehaviour
             Game.HomeCurrentPitcher != Game.WhoWinCondition &&
             Game.HomeCurrentPitcher >= 6)
         {
-            // È¨ Åõ¼ö
+            // í™ˆ íˆ¬ìˆ˜
             Game.HomeCurrentHoldPitcher = Game.HomeCurrentPitcher;
         }
         else if ((Game.HomeScore >= Game.AwayScore - 3) &&
@@ -1608,17 +1608,17 @@ public class GameModule : MonoBehaviour
             Game.AwayCurrentPitcher != Game.WhoWinCondition &&
             Game.AwayCurrentPitcher >= 6)
         {
-            // ¿øÁ¤ Åõ¼ö
+            // ì›ì • íˆ¬ìˆ˜
             Game.AwayCurrentHoldPitcher = Game.AwayCurrentPitcher;
         }
         else if (Game.HomeScore <= Game.AwayScore && Game.HomeCurrentHoldPitcher != 1000)
         {
-            // ¸®µå ¸øÁöÅ°¸é È¦µå ÃÊ±âÈ­
+            // ë¦¬ë“œ ëª»ì§€í‚¤ë©´ í™€ë“œ ì´ˆê¸°í™”
             Game.HomeCurrentHoldPitcher = 1000;
         }
         else if (Game.HomeScore >= Game.AwayScore && Game.AwayCurrentHoldPitcher != 1000)
         {
-            // ¸®µå ¸øÁöÅ°¸é È¦µå ÃÊ±âÈ­
+            // ë¦¬ë“œ ëª»ì§€í‚¤ë©´ í™€ë“œ ì´ˆê¸°í™”
             Game.AwayCurrentHoldPitcher = 1000;
         }
     }
@@ -1638,46 +1638,46 @@ public class GameModule : MonoBehaviour
     void EvaluatePitcherChange(int currentPitcher, int pitcherInn, int pitcherEarn, int t, Game game)
     {
         int changePossibility = -1;
-        if (currentPitcher <= 5) // ¼±¹ß Åõ¼ö
+        if (currentPitcher <= 5) // ì„ ë°œ íˆ¬ìˆ˜
         {
-            if (pitcherInn < 15 && pitcherEarn >= 5 && pitcherEarn <= 6) // 4.2ÀÌ´× ÀÌÇÏ 5~6½ÇÁ¡
+            if (pitcherInn < 15 && pitcherEarn >= 5 && pitcherEarn <= 6) // 4.2ì´ë‹ ì´í•˜ 5~6ì‹¤ì 
             {
-                changePossibility = UnityEngine.Random.Range(0, 4); // ÅÏ ´ç ±³Ã¼ °¡´É¼º 40% 
+                changePossibility = UnityEngine.Random.Range(0, 4); // í„´ ë‹¹ êµì²´ ê°€ëŠ¥ì„± 40% 
             }
-            else if (pitcherInn <= 15 && pitcherEarn >= 7) // 5ÀÌ´× ÀÌÇÏ 7½ÇÁ¡ ÀÌ»ó
+            else if (pitcherInn <= 15 && pitcherEarn >= 7) // 5ì´ë‹ ì´í•˜ 7ì‹¤ì  ì´ìƒ
             {
-                changePossibility = UnityEngine.Random.Range(0, 9); // ÅÏ ´ç ±³Ã¼ °¡´É¼º 100% 
+                changePossibility = UnityEngine.Random.Range(0, 9); // í„´ ë‹¹ êµì²´ ê°€ëŠ¥ì„± 100% 
             }
-            else if (pitcherInn < 18 && pitcherInn >= 15 && pitcherEarn >= 2) // 5~5.2ÀÌ´× 2½ÇÁ¡ ÀÌ»ó
+            else if (pitcherInn < 18 && pitcherInn >= 15 && pitcherEarn >= 2) // 5~5.2ì´ë‹ 2ì‹¤ì  ì´ìƒ
             {
-                changePossibility = UnityEngine.Random.Range(0, 1); // ÅÏ ´ç ±³Ã¼ °¡´É¼º 10%
+                changePossibility = UnityEngine.Random.Range(0, 1); // í„´ ë‹¹ êµì²´ ê°€ëŠ¥ì„± 10%
             }
-            else if (pitcherInn < 21 && pitcherInn >= 18 && pitcherEarn >= 2) // 6~6.2ÀÌ´× 2½ÇÁ¡ ÀÌ»ó
+            else if (pitcherInn < 21 && pitcherInn >= 18 && pitcherEarn >= 2) // 6~6.2ì´ë‹ 2ì‹¤ì  ì´ìƒ
             {
-                changePossibility = UnityEngine.Random.Range(0, 2); // ÅÏ ´ç ±³Ã¼ °¡´É¼º 20%
+                changePossibility = UnityEngine.Random.Range(0, 2); // í„´ ë‹¹ êµì²´ ê°€ëŠ¥ì„± 20%
             }
-            else if (pitcherInn >= 21 && pitcherEarn <= 1) // 7ÀÌ´× ÀÌ»ó 1½ÇÁ¡ ÀÌ»ó ÀÌÇÏ
+            else if (pitcherInn >= 21 && pitcherEarn <= 1) // 7ì´ë‹ ì´ìƒ 1ì‹¤ì  ì´ìƒ ì´í•˜
             {
-                changePossibility = UnityEngine.Random.Range(0, 2); // ÅÏ ´ç ±³Ã¼ °¡´É¼º 20%
+                changePossibility = UnityEngine.Random.Range(0, 2); // í„´ ë‹¹ êµì²´ ê°€ëŠ¥ì„± 20%
             }
-            else if (pitcherInn >= 21 && pitcherEarn > 1) // 7ÀÌ´× ÀÌ»ó 2½ÇÁ¡ ÀÌ»ó ÀÌ»ó
+            else if (pitcherInn >= 21 && pitcherEarn > 1) // 7ì´ë‹ ì´ìƒ 2ì‹¤ì  ì´ìƒ ì´ìƒ
             {
-                changePossibility = UnityEngine.Random.Range(0, 5); // ÅÏ ´ç ±³Ã¼ °¡´É¼º 50%
+                changePossibility = UnityEngine.Random.Range(0, 5); // í„´ ë‹¹ êµì²´ ê°€ëŠ¥ì„± 50%
             }
         }
-        else // °èÅõ Åõ¼ö
+        else // ê³„íˆ¬ íˆ¬ìˆ˜
         {
-            if (pitcherInn >= 3 && pitcherEarn == 0) // 1ÀÌ´× ÀÌ»ó 0½ÇÁ¡
+            if (pitcherInn >= 3 && pitcherEarn == 0) // 1ì´ë‹ ì´ìƒ 0ì‹¤ì 
             {
-                changePossibility = UnityEngine.Random.Range(0, 2); // ÅÏ ´ç ±³Ã¼ °¡´É¼º 20%
+                changePossibility = UnityEngine.Random.Range(0, 2); // í„´ ë‹¹ êµì²´ ê°€ëŠ¥ì„± 20%
             }
-            else if (pitcherInn >= 3 && pitcherEarn >= 1) // 1ÀÌ´× ÀÌ»ó 1½ÇÁ¡ ÀÌ»ó
+            else if (pitcherInn >= 3 && pitcherEarn >= 1) // 1ì´ë‹ ì´ìƒ 1ì‹¤ì  ì´ìƒ
             {
-                changePossibility = UnityEngine.Random.Range(0, 4); // ÅÏ ´ç ±³Ã¼ °¡´É¼º 40%
+                changePossibility = UnityEngine.Random.Range(0, 4); // í„´ ë‹¹ êµì²´ ê°€ëŠ¥ì„± 40%
             }
-            else if (pitcherInn < 3 && pitcherEarn >= 1) // 1ÀÌ´× ÀÌÇÏ 1½ÇÁ¡ ÀÌ»ó
+            else if (pitcherInn < 3 && pitcherEarn >= 1) // 1ì´ë‹ ì´í•˜ 1ì‹¤ì  ì´ìƒ
             {
-                changePossibility = UnityEngine.Random.Range(0, 4); // ÅÏ ´ç ±³Ã¼ °¡´É¼º 40%
+                changePossibility = UnityEngine.Random.Range(0, 4); // í„´ ë‹¹ êµì²´ ê°€ëŠ¥ì„± 40%
             }
         }
         if (UnityEngine.Random.Range(0, 10) <= changePossibility)
@@ -1691,7 +1691,7 @@ public class GameModule : MonoBehaviour
     {
         List<Pitcher> WaitHomePitcher = new List<Pitcher>();
         List<Pitcher> WaitAwayPitcher = new List<Pitcher>();
-        if (!game.IsHomeAttack) // ¿øÁ¤ÆÀ °ø°İÀÏ°æ¿ì È¨ÆÀ Åõ¼ö±³Ã¼
+        if (!game.IsHomeAttack) // ì›ì •íŒ€ ê³µê²©ì¼ê²½ìš° í™ˆíŒ€ íˆ¬ìˆ˜êµì²´
         {
             for (int k = 0; k < GameDirector.pitcherCount; k++)
             {
@@ -1719,7 +1719,7 @@ public class GameModule : MonoBehaviour
                 
             }
             int WhoChange = UnityEngine.Random.Range(0, WaitHomePitcher.Count);
-            if (game.HomeScore - 3 <= game.AwayScore && game.HomeScore > game.AwayScore && game.Innings >= 17) // ¸¶¹«¸® µîÆÇ AI
+            if (game.HomeScore - 3 <= game.AwayScore && game.HomeScore > game.AwayScore && game.Innings >= 17) // ë§ˆë¬´ë¦¬ ë“±íŒ AI
             {
                 for (int z = 0; z < WaitHomePitcher.Count; z++)
                 {
@@ -1740,7 +1740,7 @@ public class GameModule : MonoBehaviour
             }
             WaitHomePitcher[WhoChange].isAleadyAppear = true;
         }
-        else // È¨ÆÀ °ø°İÀÏ°æ¿ì ¿øÁ¤ÆÀ Åõ¼ö±³Ã¼
+        else // í™ˆíŒ€ ê³µê²©ì¼ê²½ìš° ì›ì •íŒ€ íˆ¬ìˆ˜êµì²´
         {
             for (int k = 0; k < GameDirector.pitcherCount; k++)
             {
@@ -1768,7 +1768,7 @@ public class GameModule : MonoBehaviour
                 
             }
             int WhoChange = UnityEngine.Random.Range(0, WaitAwayPitcher.Count);
-            if (game.AwayScore - 3 <= game.HomeScore && game.HomeScore < game.AwayScore && game.Innings >= 18) // ¸¶¹«¸® µîÆÇ AI
+            if (game.AwayScore - 3 <= game.HomeScore && game.HomeScore < game.AwayScore && game.Innings >= 18) // ë§ˆë¬´ë¦¬ ë“±íŒ AI
             {
                 for (int z = 0; z < WaitAwayPitcher.Count; z++)
                 {
@@ -1847,7 +1847,7 @@ public class GameModule : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Ã¥ÀÓ ÁÖÀÚ ¿À·ù ÀÔ´Ï´Ù.");
+                    Debug.Log("ì±…ì„ ì£¼ì ì˜¤ë¥˜ ì…ë‹ˆë‹¤.");
                 }
             }
         } else
@@ -1877,7 +1877,7 @@ public class GameModule : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Ã¥ÀÓ ÁÖÀÚ ¿À·ù ÀÔ´Ï´Ù.");
+                    Debug.Log("ì±…ì„ ì£¼ì ì˜¤ë¥˜ ì…ë‹ˆë‹¤.");
                 }
             }
         }
@@ -1903,44 +1903,44 @@ public class GameModule : MonoBehaviour
         if (game.isBase1 == false && game.isBase2 == false && game.isBase3 == false)
         {
             game.isBase1 = true;
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ º¼³İ";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "º¼³İ ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ë³¼ë„·";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ë³¼ë„· ";
         }
         else if (game.isBase1 == true && game.isBase2 == false && game.isBase3 == false)
         {
             game.isBase2 = true;
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ º¼³İ";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "º¼³İ ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ë³¼ë„·";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ë³¼ë„· ";
         }
         else if (game.isBase1 == false && game.isBase2 == true && game.isBase3 == false)
         {
             game.isBase1 = true;
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ º¼³İ";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "º¼³İ ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ë³¼ë„·";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ë³¼ë„· ";
         }
         else if (game.isBase1 == false && game.isBase2 == false && game.isBase3 == true)
         {
             game.isBase1 = true;
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ º¼³İ";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "º¼³İ ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ë³¼ë„·";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ë³¼ë„· ";
         }
         else if (game.isBase1 == true && game.isBase2 == true && game.isBase3 == false)
         {
             game.isBase3 = true;
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ º¼³İ";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "º¼³İ ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ë³¼ë„·";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ë³¼ë„· ";
         }
         else if (game.isBase1 == true && game.isBase2 == false && game.isBase3 == true)
         {
             game.isBase2 = true;
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ º¼³İ";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "º¼³İ ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ë³¼ë„·";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ë³¼ë„· ";
         }
         else if (game.isBase1 == false && game.isBase2 == true && game.isBase3 == true)
         {
             game.isBase1 = true;
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ º¼³İ";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "º¼³İ ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ë³¼ë„·";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ë³¼ë„· ";
         }
         else if (game.isBase1 == true && game.isBase2 == true && game.isBase3 == true)
         {
@@ -1956,8 +1956,8 @@ public class GameModule : MonoBehaviour
                 game.InningScore[0, game.Innings / 2]++;
                 game.RHEB[0, 0]++;
             }
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ¹Ğ¾î³»±â º¼³İ";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "º¼³İ(1Å¸Á¡) ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ë°€ì–´ë‚´ê¸° ë³¼ë„·";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ë³¼ë„·(1íƒ€ì ) ";
             if (!GameDirector.isPostSeason)
             {
                 GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -1974,7 +1974,7 @@ public class GameModule : MonoBehaviour
     {
         GameDirector.batter[game.TargetBatterIndex].todayHit++;
         GameDirector.batter[game.TargetBatterIndex].todayAB++;
-        // ´ÜÅ¸
+        // ë‹¨íƒ€
         if (game.IsHomeAttack == true)
         {
             game.RHEB[1, 1]++;
@@ -1986,14 +1986,14 @@ public class GameModule : MonoBehaviour
         if (game.isBase1 == false && game.isBase2 == false && game.isBase3 == false)
         {
             game.isBase1 = true;
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ¾ÈÅ¸";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸ ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ì•ˆíƒ€";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€ ";
         }
         else if (game.isBase1 == true && game.isBase2 == false && game.isBase3 == false)
         {
             game.isBase2 = true;
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ¾ÈÅ¸";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸ ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ì•ˆíƒ€";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€ ";
         }
         else if (game.isBase1 == false && game.isBase2 == true && game.isBase3 == false)
         {
@@ -2002,8 +2002,8 @@ public class GameModule : MonoBehaviour
                 game.isBase1 = true;
                 game.isBase2 = false;
                 game.isBase3 = true;
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ¾ÈÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸ ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ì•ˆíƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€ ";
             }
             else
             {
@@ -2021,8 +2021,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, (game.Innings / 2) + 1]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½ÃÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œíƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2047,8 +2047,8 @@ public class GameModule : MonoBehaviour
                 game.InningScore[0, game.Innings / 2]++;
                 game.RHEB[0, 0]++;
             }
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½ÃÅ¸";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸(1Å¸Á¡) ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œíƒ€";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€(1íƒ€ì ) ";
             if (!GameDirector.isPostSeason)
             {
                 GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2061,8 +2061,8 @@ public class GameModule : MonoBehaviour
             if (UnityEngine.Random.Range(1, 101) > 50)
             {
                 game.isBase3 = true;
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ¾ÈÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸ ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ì•ˆíƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€ ";
             }
             else
             {
@@ -2079,8 +2079,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½ÃÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œíƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2108,8 +2108,8 @@ public class GameModule : MonoBehaviour
                 game.InningScore[0, game.Innings / 2]++;
                 game.RHEB[0, 0]++;
             }
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½ÃÅ¸";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸(1Å¸Á¡) ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œíƒ€";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€(1íƒ€ì ) ";
             if (!GameDirector.isPostSeason)
             {
                 GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2120,7 +2120,7 @@ public class GameModule : MonoBehaviour
         else if (game.isBase1 == false && game.isBase2 == true && game.isBase3 == true)
         {
             if (UnityEngine.Random.Range(1, 101) > 50)
-            { // 2Å¸Á¡
+            { // 2íƒ€ì 
                 game.isBase1 = true;
                 game.isBase2 = false;
                 game.isBase3 = false;
@@ -2136,8 +2136,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2] += 2;
                     game.RHEB[0, 0] += 2;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2Å¸Á¡ Àû½ÃÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸(2Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2íƒ€ì  ì ì‹œíƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€(2íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI += 2;
@@ -2146,7 +2146,7 @@ public class GameModule : MonoBehaviour
                 UpdatePitcherStats(game);
             }
             else
-            { // 1Å¸Á¡
+            { // 1íƒ€ì 
                 game.isBase1 = true;
                 game.isBase2 = false;
                 if (game.IsHomeAttack == true)
@@ -2161,8 +2161,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½ÃÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œíƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2188,8 +2188,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2] += 2;
                     game.RHEB[0, 0] += 2;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2Å¸Á¡ Àû½ÃÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸(2Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2íƒ€ì  ì ì‹œíƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€(2íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI += 2;
@@ -2211,8 +2211,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½ÃÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "¾ÈÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œíƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "ì•ˆíƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2240,7 +2240,7 @@ public class GameModule : MonoBehaviour
     {
         GameDirector.batter[game.TargetBatterIndex].todayHit++;
         GameDirector.batter[game.TargetBatterIndex].todayAB++;
-        // ÀåÅ¸
+        // ì¥íƒ€
         if (game.IsHomeAttack == true)
         {
             game.RHEB[1, 1]++;
@@ -2254,8 +2254,8 @@ public class GameModule : MonoBehaviour
             if (UnityEngine.Random.Range(1, 101) > 20)
             {
                 game.isBase2 = true;
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸ ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€ ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].totalBase += 2;
@@ -2264,8 +2264,8 @@ public class GameModule : MonoBehaviour
             else
             {
                 game.isBase3 = true;
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 3·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "3·çÅ¸ ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 3ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "3ë£¨íƒ€ ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].totalBase += 3;
@@ -2279,8 +2279,8 @@ public class GameModule : MonoBehaviour
                 game.isBase1 = false;
                 game.isBase2 = true;
                 game.isBase3 = true;
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸ ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€ ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].totalBase += 2;
@@ -2302,8 +2302,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½Ã 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2328,8 +2328,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½Ã 3·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "3·çÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œ 3ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "3ë£¨íƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2344,8 +2344,8 @@ public class GameModule : MonoBehaviour
             if (UnityEngine.Random.Range(1, 101) > 90)
             {
                 game.isBase3 = true;
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸ ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€ ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].totalBase += 2;
@@ -2365,8 +2365,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½Ã 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2391,8 +2391,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½Ã 3·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "3·çÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œ 3ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "3ë£¨íƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2420,8 +2420,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½Ã 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2444,8 +2444,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½Ã 3·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "3·çÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œ 3ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "3ë£¨íƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2474,8 +2474,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½Ã 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2500,8 +2500,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2] += 2;
                     game.RHEB[0, 0] += 2;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2Å¸Á¡ Àû½Ã 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸(2Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2íƒ€ì  ì ì‹œ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€(2íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI += 2;
@@ -2527,8 +2527,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2] += 2;
                     game.RHEB[0, 0] += 2;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2Å¸Á¡ Àû½Ã 3·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "3·çÅ¸(2Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2íƒ€ì  ì ì‹œ 3ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "3ë£¨íƒ€(2íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI += 2;
@@ -2557,8 +2557,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½Ã 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2584,8 +2584,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2] += 2;
                     game.RHEB[0, 0] += 2;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2Å¸Á¡ Àû½Ã 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸(2Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2íƒ€ì  ì ì‹œ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€(2íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI += 2;
@@ -2611,8 +2611,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2] += 2;
                     game.RHEB[0, 0] += 2;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2Å¸Á¡ Àû½Ã 3·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "3·çÅ¸(2Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2íƒ€ì  ì ì‹œ 3ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "3ë£¨íƒ€(2íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI += 2;
@@ -2639,8 +2639,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2] += 2;
                     game.RHEB[0, 0] += 2;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2Å¸Á¡ Àû½Ã 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸(2Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2íƒ€ì  ì ì‹œ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€(2íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI += 2;
@@ -2663,8 +2663,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2]++;
                     game.RHEB[0, 0]++;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Àû½Ã 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸(1Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  ì ì‹œ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€(1íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI++;
@@ -2688,8 +2688,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2] += 2;
                     game.RHEB[0, 0] += 2;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2Å¸Á¡ Àû½Ã 3·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "3·çÅ¸(2Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2íƒ€ì  ì ì‹œ 3ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "3ë£¨íƒ€(2íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI += 2;
@@ -2716,8 +2716,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2] += 2;
                     game.RHEB[0, 0] += 2;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 2Å¸Á¡ Àû½Ã 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸(2Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 2íƒ€ì  ì ì‹œ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€(2íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI += 2;
@@ -2742,8 +2742,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2] += 3;
                     game.RHEB[0, 0] += 3;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ½Ï¾µÀÌ 3Å¸Á¡ Àû½Ã 2·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "2·çÅ¸(3Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ì‹¹ì“¸ì´ 3íƒ€ì  ì ì‹œ 2ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "2ë£¨íƒ€(3íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI += 3;
@@ -2768,8 +2768,8 @@ public class GameModule : MonoBehaviour
                     game.InningScore[0, game.Innings / 2] += 3;
                     game.RHEB[0, 0] += 3;
                 }
-                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ½Ï¾µÀÌ 3Å¸Á¡ Àû½Ã 3·çÅ¸";
-                GameDirector.batter[game.TargetBatterIndex].todayResult += "3·çÅ¸(3Å¸Á¡) ";
+                game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ì‹¹ì“¸ì´ 3íƒ€ì  ì ì‹œ 3ë£¨íƒ€";
+                GameDirector.batter[game.TargetBatterIndex].todayResult += "3ë£¨íƒ€(3íƒ€ì ) ";
                 if (!GameDirector.isPostSeason)
                 {
                     GameDirector.batter[game.TargetBatterIndex].RBI += 3;
@@ -2812,26 +2812,26 @@ public class GameModule : MonoBehaviour
         if (TotalBase == 1)
         {
             GamePlay_Earn(t, game, 1);
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ¼Ö·Î È¨·± !";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "1Á¡È¨·± ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ì†”ë¡œ í™ˆëŸ° !";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "1ì í™ˆëŸ° ";
         }
         else if (TotalBase == 2)
         {
             GamePlay_Earn(t, game, 2);
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ Åõ·± È¨·± !!";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "2Á¡È¨·± ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ íˆ¬ëŸ° í™ˆëŸ° !!";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "2ì í™ˆëŸ° ";
         }
         else if (TotalBase == 3)
         {
             GamePlay_Earn(t, game, 3);
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ¾²¸®·± È¨·± !!!";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "3Á¡È¨·± ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ì“°ë¦¬ëŸ° í™ˆëŸ° !!!";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "3ì í™ˆëŸ° ";
         }
         else if (TotalBase == 4)
         {
             GamePlay_Earn(t, game, 4);
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ¸¸·ç È¨·± !!!!";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "¸¸·çÈ¨·± ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ë§Œë£¨ í™ˆëŸ° !!!!";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ë§Œë£¨í™ˆëŸ° ";
         }
         game.isBase1 = false;
         game.isBase2 = false;
@@ -2898,14 +2898,14 @@ public class GameModule : MonoBehaviour
             {
                 GameDirector.batter[game.TargetBatterIndex].RBI++;
             }
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ 1Å¸Á¡ Èñ»ı ÇÃ¶óÀÌ ¾Æ¿ô";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "¶á°ø(1Å¸Á¡) ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ 1íƒ€ì  í¬ìƒ í”Œë¼ì´ ì•„ì›ƒ";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ëœ¬ê³µ(1íƒ€ì ) ";
             GamePlay_Earn(t, game, 1);
         }
         else
         {
-            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ÇÃ¶óÀÌ ¾Æ¿ô";
-            GameDirector.batter[game.TargetBatterIndex].todayResult += "¶á°ø ";
+            game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ í”Œë¼ì´ ì•„ì›ƒ";
+            GameDirector.batter[game.TargetBatterIndex].todayResult += "ëœ¬ê³µ ";
         }
         UpdatePitcherStats(game);
         UpdateBatterStats(game);
@@ -2937,8 +2937,8 @@ public class GameModule : MonoBehaviour
                 GameDirector.pitcher[game.TargetPitcherIndex].inningsPitched1++;
             }
         }
-        game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ ¶¥º¼ ¾Æ¿ô";
-        GameDirector.batter[game.TargetBatterIndex].todayResult += "¶¥º¼ ";
+        game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ë•…ë³¼ ì•„ì›ƒ";
+        GameDirector.batter[game.TargetBatterIndex].todayResult += "ë•…ë³¼ ";
         UpdatePitcherStats(game);
         UpdateBatterStats(game);
         UpdateBatterNumber(game);
@@ -2970,8 +2970,8 @@ public class GameModule : MonoBehaviour
                 GameDirector.pitcher[game.TargetPitcherIndex].inningsPitched1++;
             }
         }
-        game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ÀÇ »ïÁø ¾Æ¿ô";
-        GameDirector.batter[game.TargetBatterIndex].todayResult += "»ïÁø ";
+        game.Message = GameDirector.batter[game.TargetBatterIndex].name + "ì˜ ì‚¼ì§„ ì•„ì›ƒ";
+        GameDirector.batter[game.TargetBatterIndex].todayResult += "ì‚¼ì§„ ";
         UpdatePitcherStats(game);
         UpdateBatterStats(game);
         UpdateBatterNumber(game);
@@ -3438,7 +3438,7 @@ public class GameModule : MonoBehaviour
                             GameDirector.batter[i].isAleadyAppear = true;
                             currentBatIndex = i;
                             int temp = GameDirector.batter[selectedBatIndex].posInTeam;
-                            GameDirector.batter[selectedBatIndex].posInTeam = GameDirector.batter[currentBatIndex].posInTeam; // Åõ¼ö¿Í ´Ù¸£°Ô Æ÷Áö¼ÇÀ» Á÷Á¢ ¹Ù²ãÁà¾ß µé¾î°¨
+                            GameDirector.batter[selectedBatIndex].posInTeam = GameDirector.batter[currentBatIndex].posInTeam; // íˆ¬ìˆ˜ì™€ ë‹¤ë¥´ê²Œ í¬ì§€ì…˜ì„ ì§ì ‘ ë°”ê¿”ì¤˜ì•¼ ë“¤ì–´ê°
                             GameDirector.batter[currentBatIndex].posInTeam = temp;
                             GameDirector.batter[selectedBatIndex].game++;
                             break;
@@ -3466,7 +3466,7 @@ public class GameModule : MonoBehaviour
                             GameDirector.batter[i].isAleadyAppear = true;
                             currentBatIndex = i;
                             int temp = GameDirector.batter[selectedBatIndex].posInTeam;
-                            GameDirector.batter[selectedBatIndex].posInTeam = GameDirector.batter[currentBatIndex].posInTeam; // Åõ¼ö¿Í ´Ù¸£°Ô Æ÷Áö¼ÇÀ» Á÷Á¢ ¹Ù²ãÁà¾ß µé¾î°¨
+                            GameDirector.batter[selectedBatIndex].posInTeam = GameDirector.batter[currentBatIndex].posInTeam; // íˆ¬ìˆ˜ì™€ ë‹¤ë¥´ê²Œ í¬ì§€ì…˜ì„ ì§ì ‘ ë°”ê¿”ì¤˜ì•¼ ë“¤ì–´ê°
                             GameDirector.batter[currentBatIndex].posInTeam = temp;
                             GameDirector.batter[selectedBatIndex].game++;
                             break;
@@ -3492,7 +3492,7 @@ public class GameModule : MonoBehaviour
                             GameDirector.batter[i].isAleadyAppear = true;
                             currentBatIndex = i;
                             int temp = GameDirector.batter[selectedBatIndex].posInTeam;
-                            GameDirector.batter[selectedBatIndex].posInTeam = GameDirector.batter[currentBatIndex].posInTeam; // Åõ¼ö¿Í ´Ù¸£°Ô Æ÷Áö¼ÇÀ» Á÷Á¢ ¹Ù²ãÁà¾ß µé¾î°¨
+                            GameDirector.batter[selectedBatIndex].posInTeam = GameDirector.batter[currentBatIndex].posInTeam; // íˆ¬ìˆ˜ì™€ ë‹¤ë¥´ê²Œ í¬ì§€ì…˜ì„ ì§ì ‘ ë°”ê¿”ì¤˜ì•¼ ë“¤ì–´ê°
                             GameDirector.batter[currentBatIndex].posInTeam = temp;
                             //GameDirector.batter[selectedBatIndex].game++;
                             break;
@@ -3520,7 +3520,7 @@ public class GameModule : MonoBehaviour
                             GameDirector.batter[i].isAleadyAppear = true;
                             currentBatIndex = i;
                             int temp = GameDirector.batter[selectedBatIndex].posInTeam;
-                            GameDirector.batter[selectedBatIndex].posInTeam = GameDirector.batter[currentBatIndex].posInTeam; // Åõ¼ö¿Í ´Ù¸£°Ô Æ÷Áö¼ÇÀ» Á÷Á¢ ¹Ù²ãÁà¾ß µé¾î°¨
+                            GameDirector.batter[selectedBatIndex].posInTeam = GameDirector.batter[currentBatIndex].posInTeam; // íˆ¬ìˆ˜ì™€ ë‹¤ë¥´ê²Œ í¬ì§€ì…˜ì„ ì§ì ‘ ë°”ê¿”ì¤˜ì•¼ ë“¤ì–´ê°
                             GameDirector.batter[currentBatIndex].posInTeam = temp;
                             //GameDirector.batter[selectedBatIndex].game++;
                             break;
@@ -3581,27 +3581,27 @@ public class GameModule : MonoBehaviour
             GameMode = mode;
             isPrefer = false;
             ModePanel.SetActive(false);
-            // ¸ğµå¿¡ µû¸¥ ÁøÇà ¹öÆ°
+            // ëª¨ë“œì— ë”°ë¥¸ ì§„í–‰ ë²„íŠ¼
             switch (GameMode)
             {
                 case 0:
-                    PlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "ÁøÇà";
+                    PlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "ì§„í–‰";
                     PlayButton.interactable = true;
                     break;
                 case 1:
-                    PlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "1¹è¼Ó";
+                    PlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "1ë°°ì†";
                     PlayButton.interactable = false;
                     break;
                 case 2:
-                    PlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "2¹è¼Ó";
+                    PlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "2ë°°ì†";
                     PlayButton.interactable = false;
                     break;
                 case 3:
-                    PlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "3¹è¼Ó";
+                    PlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "3ë°°ì†";
                     PlayButton.interactable = false;
                     break;
                 default:
-                    PlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "ÁøÇà";
+                    PlayButton.GetComponentInChildren<TextMeshProUGUI>().text = "ì§„í–‰";
                     PlayButton.interactable = true;
                     break;
             }
