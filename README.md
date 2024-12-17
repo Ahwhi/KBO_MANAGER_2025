@@ -11,11 +11,11 @@
 
 ### 🎮 게임 설명
 
-● 장르: **야구 시뮬레이션 게임**
+⭐ 장르: **야구 시뮬레이션 게임**
 
-● 플랫폼: Windows, Android(Mobile), iOS(Mobile)
+⭐ 플랫폼: Windows, Android(Mobile), iOS(Mobile)
 
-● 사용 엔진: **Unity 2022. 3. 44f1** <DX11>
+⭐ 엔진: **Unity 2022. 3. 44f1** <DX11>
 
 💇‍♂ 프로젝트: **개인 (100%)**
 
