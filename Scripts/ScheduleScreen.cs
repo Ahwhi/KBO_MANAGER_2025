@@ -26,23 +26,23 @@ public class ScheduleScreen : MonoBehaviour
         SchedulePrefabs = new GameObject[GameDirector.totalMatchCount];
         GetSchedulePrefab();
         ViewMonth = GameDirector.currentDate.month;
-        MonthText.text = ViewMonth.ToString() + "ø˘";
+        MonthText.text = ViewMonth.ToString() + "Ïõî";
         GetCalenderPrefab();
         CurrentDay = GameObject.Find("CurrentDay").GetComponent<TextMeshProUGUI>();
-        CurrentDay.text = GameDirector.currentDate.year.ToString() + "≥‚ " + GameDirector.currentDate.month.ToString() + "ø˘ " + GameDirector.currentDate.day.ToString() + "¿œ " + DataToString.DayOfWeekToString(GameDirector.currentDate.dayOfWeek);
+        CurrentDay.text = GameDirector.currentDate.year.ToString() + "ÎÖÑ " + GameDirector.currentDate.month.ToString() + "Ïõî " + GameDirector.currentDate.day.ToString() + "Ïùº " + DataToString.DayOfWeekToString(GameDirector.currentDate.dayOfWeek);
     }
 
     void GetCalenderPrefab()
     {
         Date date = new Date(2025, 3, 1, DayOfWeek.SATURDAY);
 
-        // «ˆ¿Á ¥ﬁ 1¿œ±Ó¡ˆ ¿Ãµø
+        // ÌòÑÏû¨ Îã¨ 1ÏùºÍπåÏßÄ Ïù¥Îèô
         while (date.month < ViewMonth)
         {
             date = CreateData.UpdateDate(date);
         }
 
-        // 1¿œ æ’ø° ∫Û ø‰¿œ¿∫ ∫Û «¡∏Æ∆’ √§øˆ≥÷±‚
+        // 1Ïùº ÏïûÏóê Îπà ÏöîÏùºÏùÄ Îπà ÌîÑÎ¶¨Ìåπ Ï±ÑÏõåÎÑ£Í∏∞
         if (date.day == 1 && date.dayOfWeek != DayOfWeek.SUNDAY)
         {
             for (int i = 0; i < (int)date.dayOfWeek + 1; i++)
@@ -56,14 +56,14 @@ public class ScheduleScreen : MonoBehaviour
             }
         }
 
-        // 3ø˘¿Ã∏È «¡∏ÆΩ√¡ π›øµ
+        // 3ÏõîÏù¥Î©¥ ÌîÑÎ¶¨ÏãúÏ¶å Î∞òÏòÅ
         if (ViewMonth == 3)
         {
             for (int i = 1; i < 25; i++)
             {
                 GameObject CurrentPrefab = Instantiate(DatePrefab, CalenderPanel);
                 textArray = CurrentPrefab.GetComponentsInChildren<TextMeshProUGUI>();
-                textArray[0].text = "«¡∏ÆΩ√¡";
+                textArray[0].text = "ÌîÑÎ¶¨ÏãúÏ¶å";
                 textArray[0].color = Color.white;
             }
             date = new Date(2025, 3, 25, DayOfWeek.TUESDAY);
@@ -74,7 +74,7 @@ public class ScheduleScreen : MonoBehaviour
             GameObject CurrentPrefab2 = Instantiate(DatePrefab, CalenderPanel);
             textArray = CurrentPrefab2.GetComponentsInChildren<TextMeshProUGUI>();
             imageArray = CurrentPrefab2.GetComponentsInChildren<Image>();
-            textArray[0].text = "»ﬁΩƒ";
+            textArray[0].text = "Ìú¥Ïãù";
             imageArray[0].color = DefalutColor;
             date = CreateData.UpdateDate(date);
         }
@@ -101,7 +101,7 @@ public class ScheduleScreen : MonoBehaviour
 
                     if (!GameDirector.schedule[s].isEnd)
                     {
-                        textArray[0].text = "∞Ê±‚ ¿¸";
+                        textArray[0].text = "Í≤ΩÍ∏∞ Ï†Ñ";
                         imageArray[0].color = DefalutColor;
                     } else
                     {
@@ -129,7 +129,7 @@ public class ScheduleScreen : MonoBehaviour
                             GameObject CurrentPrefab2 = Instantiate(DatePrefab, CalenderPanel);
                             textArray = CurrentPrefab2.GetComponentsInChildren<TextMeshProUGUI>();
                             imageArray = CurrentPrefab2.GetComponentsInChildren<Image>();
-                            textArray[0].text = "»ﬁΩƒ";
+                            textArray[0].text = "Ìú¥Ïãù";
                             imageArray[0].color = DefalutColor;
                             date = CreateData.UpdateDate(date);
                         }
@@ -173,23 +173,23 @@ public class ScheduleScreen : MonoBehaviour
                     if (GameDirector.schedule[s].homeScore > GameDirector.schedule[s].awayScore && GameDirector.schedule[s].homeTeam == GameDirector.myTeam)
                     {
                         SchedulePrefabs[s].GetComponent<Image>().color = WinColor;
-                        textArray[4].text += " Ω¬";
+                        textArray[4].text += " Ïäπ";
                         textArray[4].color = Color.cyan;
                     } else if (GameDirector.schedule[s].homeScore < GameDirector.schedule[s].awayScore && GameDirector.schedule[s].awayTeam == GameDirector.myTeam)
                         {
                             SchedulePrefabs[s].GetComponent<Image>().color = WinColor;
-                        textArray[4].text += " Ω¬";
+                        textArray[4].text += " Ïäπ";
                         textArray[4].color = Color.cyan;
                     }
                     else if (GameDirector.schedule[s].homeScore == GameDirector.schedule[s].awayScore)
                     {
                         SchedulePrefabs[s].GetComponent<Image>().color = DrawColor;
-                        textArray[4].text += " π´";
+                        textArray[4].text += " Î¨¥";
                         textArray[4].color = Color.yellow;
                     } else
                     {
                         SchedulePrefabs[s].GetComponent<Image>().color = LoseColor;
-                        textArray[4].text += " ∆–";
+                        textArray[4].text += " Ìå®";
                         textArray[4].color = Color.magenta;
                     }
                     completedCount++;
