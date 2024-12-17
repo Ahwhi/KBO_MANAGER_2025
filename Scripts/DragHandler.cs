@@ -22,7 +22,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void OnBeginDrag(PointerEventData eventData)
     {
         originalPosition = rectTransform.position;
-        originalX = rectTransform.position.x; // X°ª¸¸ ¹Ù²ÙÀÚ
+        originalX = rectTransform.position.x; // XÂ°ÂªÂ¸Â¸ Â¹Ã™Â²Ã™Ã€Ãš
         canvasGroup.blocksRaycasts = false;
     }
 
