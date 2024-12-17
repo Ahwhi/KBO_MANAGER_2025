@@ -88,7 +88,7 @@ public class ManagePitcher : MonoBehaviour
             }
             else if (pitcher.posInTeam >= 15)
             {
-                textArray[2].text = "2��";
+                textArray[2].text = "2±º";
                 textArray[2].color = Color.gray;
             }
             else
@@ -100,20 +100,20 @@ public class ManagePitcher : MonoBehaviour
             int OVR = pitcher.SPEED + pitcher.COMMAND + pitcher.BREAKING;
             if (OVR <= 5)
             {
-                textArray[4].text = "<color=#FFFF00>��</color><color=#FFFFFF>�١١�</color>";
+                textArray[4].text = "<color=#FFFF00>¡Ú</color><color=#FFFFFF>¡Ù¡Ù¡Ù</color>";
 
             }
             else if (OVR >= 6 && OVR <= 10)
             {
-                textArray[4].text = "<color=#FFFF00>�ڡ�</color><color=#FFFFFF>�١�</color>";
+                textArray[4].text = "<color=#FFFF00>¡Ú¡Ú</color><color=#FFFFFF>¡Ù¡Ù</color>";
             }
             else if (OVR >= 11 && OVR <= 14)
             {
-                textArray[4].text = "<color=#FFFF00>�ڡڡ�</color><color=#FFFFFF>��</color>";
+                textArray[4].text = "<color=#FFFF00>¡Ú¡Ú¡Ú</color><color=#FFFFFF>¡Ù</color>";
             }
             else if (OVR >= 15)
             {
-                textArray[4].text = "<color=#FFFF00>�ڡڡڡ�</color>";
+                textArray[4].text = "<color=#FFFF00>¡Ú¡Ú¡Ú¡Ú</color>";
             }
             
 
