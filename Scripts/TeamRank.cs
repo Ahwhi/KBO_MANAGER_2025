@@ -95,28 +95,28 @@ public class TeamRank : MonoBehaviour
                     textArray[u].color = Color.green;
                 }
             }
-            string streakText = "±â·Ï ¾øÀ½";
+            string streakText = "ê¸°ë¡ ì—†ìŒ";
             if (streak[i] <= -2)
             {
-                streakText = Mathf.Abs(streak[i]).ToString() + "¿¬ÆĞ";
+                streakText = Mathf.Abs(streak[i]).ToString() + "ì—°íŒ¨";
             }
             else if (streak[i] == -1)
             {
-                streakText = Mathf.Abs(streak[i]).ToString() + "ÆĞ";
+                streakText = Mathf.Abs(streak[i]).ToString() + "íŒ¨";
             }
             else if (streak[i] == 1)
             {
-                streakText = streak[i].ToString() + "½Â";
+                streakText = streak[i].ToString() + "ìŠ¹";
             }
             else if (streak[i] >= 2)
             {
-                streakText = streak[i].ToString() + "¿¬½Â";
+                streakText = streak[i].ToString() + "ì—°ìŠ¹";
             }
             textArray[8].text = streakText;
         }
 
         CurrentDay = GameObject.Find("CurrentDay").GetComponent<TextMeshProUGUI>();
-        CurrentDay.text = GameDirector.currentDate.year.ToString() + "³â " + GameDirector.currentDate.month.ToString() + "¿ù " + GameDirector.currentDate.day.ToString() + "ÀÏ " + DataToString.DayOfWeekToString(GameDirector.currentDate.dayOfWeek);
+        CurrentDay.text = GameDirector.currentDate.year.ToString() + "ë…„ " + GameDirector.currentDate.month.ToString() + "ì›” " + GameDirector.currentDate.day.ToString() + "ì¼ " + DataToString.DayOfWeekToString(GameDirector.currentDate.dayOfWeek);
     }
 
     GameObject GetLineObject(int index)
