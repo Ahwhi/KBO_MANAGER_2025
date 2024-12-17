@@ -95,7 +95,7 @@ public class SaveLoad
     {
         if (!File.Exists(FileName))
         {
-            Debug.LogError("ÆÄÀÏÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+            Debug.LogError("íŒŒì¼ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
             return;
         }
 
@@ -321,7 +321,7 @@ public class SaveLoad
                 }
                 else
                 {
-                    Debug.LogError("Àß¸øµÈ Çü½ÄÀÇ µ¥ÀÌÅÍ°¡ ÀÖ½À´Ï´Ù: " + line);
+                    Debug.LogError("ì˜ëª»ëœ í˜•ì‹ì˜ ë°ì´í„°ê°€ ìˆìŠµë‹ˆë‹¤: " + line);
                 }
             }
         }
