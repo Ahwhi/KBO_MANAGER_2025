@@ -203,7 +203,7 @@ public class Title : MonoBehaviour
         if (File.Exists(fileName))
         {
             File.Delete(fileName);
-            dataPanel.GetComponentInChildren<TextMeshProUGUI>().text = "历厘等 单捞磐啊 绝嚼聪促.";
+            dataPanel.GetComponentInChildren<TextMeshProUGUI>().text = "鞝�鞛ル悳 雿办澊韯瓣皜 鞐嗢姷雼堧嫟.";
             dataPanel.SetActive(false);
             if (!File.Exists(fileName1) && !File.Exists(fileName2) && !File.Exists(fileName3))
             {
