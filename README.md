@@ -25,13 +25,13 @@
 
 ### 🧾 기술 스택
 
-● 유니티 UI: (Canvas, Panel, Image, Sprite, Button, Scroll View, Slider, Dropdown 등) 
+🔥 유니티 UI: (Canvas, Panel, Image, Sprite, Button, Scroll View, Slider, Dropdown 등) 
 
-● C# 자료구조: (데이터 정렬 및 Queue<>, Stack<>, Func<>, Dictionary<>, List<> 등)
+🔥 C# 자료구조: (데이터 정렬 및 Queue<>, Stack<>, Func<>, Dictionary<>, List<> 등)
 
-● C# CSV 파일(.txt) 저장/로드
+🔥 C# CSV 파일(.txt) 저장/로드
 
-● 싱글턴 방식(GameDirector.cs) 게임 운영
+🔥 싱글턴 방식(GameDirector.cs) 게임 운영
 
 ---
 
