@@ -44,18 +44,18 @@ Link2: 준비 중
 ---
 
 ### 🔎 게임 미리보기
-![SC0](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/0.pn)
-![SC1](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/1.png)
-![SC2](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/2.pn)
-![SC3](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/3.png)
-![SC4](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/4.png)
-![SC5](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/5.png)
-![SC6](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/6.png)
-![SC7](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/7.png)
-![SC8](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/8.png)
-![SC9](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/9.png)
-![SC10](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/10.png)
-![SC11](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/11.png)
+![S0](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/0.png)
+![S1](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/1.png)
+![S2](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/2.png)
+![S3](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/3.png)
+![S4](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/4.png)
+![S5](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/5.png)
+![S6](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/6.png)
+![S7](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/7.png)
+![S8](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/8.png)
+![S9](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/9.png)
+![S10](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/10.png)
+![S11](https://github.com/Ahwhi/KBO_MANAGER_2025/blob/main/ScreenShots/11.png)
 
 ---
 
