@@ -26,6 +26,8 @@
 ### 🧾 기술 스택
 
 🌟 **Unity UI**: (Canvas, Panel, Image, Sprite, Button, Scroll View, Slider, Dropdown 등) 
+1. 멀티 플랫폼 / 다양한 해상도 대응
+2. 커스텀 쉐이더 스크립트 사용 등
 
 🌌 **C# 자료구조**: (데이터 정렬 및 Queue<>, Stack<>, Func<>, Dictionary<>, List<> 등)
 
